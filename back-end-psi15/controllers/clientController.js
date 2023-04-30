@@ -1,5 +1,7 @@
 const Client = require("../models/client");
 const asyncHandler = require('express-async-handler');
+const { body, validationResult } = require("express-validator");
+
 
 // Display list of all Clients.
 exports.client_list = asyncHandler(async (req, res, next) => {
@@ -31,7 +33,7 @@ exports.client_detail = asyncHandler(async (req, res, next) => {
 
 // Post new Client.
 exports.client_create_post = [
-    /*
+    
     body("username")
       .trim()
       .isLength({ min: 3 })
@@ -41,10 +43,11 @@ exports.client_create_post = [
       .trim()
       .isLength({ min: 8 })
       .escape(),
-    */
+    
     // Process request after validation and sanitization.
     asyncHandler(async (req, res, next) => {
 
+      const errors = validationResult(req);
       // Extract the validation errors from a request.
   
       // Create Author object with escaped and trimmed data
@@ -52,8 +55,12 @@ exports.client_create_post = [
         username: req.body.username,
         password: req.body.password,
       });
+
+      if (!errors.isEmpty()) {
+        return;
+      }
         await author.save();
-        res.redirect(author.url);
+        //res.redirect("/client");
       }
     ),
   ];
