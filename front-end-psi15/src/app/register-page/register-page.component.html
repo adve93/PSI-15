@@ -1,13 +1,13 @@
 <div><h1>Registration</h1></div>
 <div>
-    <form (submit)="register()">
+    <form (submit)="addUser(usernameInput.value, passwordInoput.value)">
         <div>
           <label for="username">Username:</label>
-          <input type="text" id="username" name="username" [(ngModel)]="username">
+          <input type="text" id="username" name="username" #usernameInput>
         </div>
         <div>
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password" [(ngModel)]="password">
+          <input type="password" id="password" name="password" #passwordInoput>
         </div>
         <button type="submit">Register</button>
       </form>

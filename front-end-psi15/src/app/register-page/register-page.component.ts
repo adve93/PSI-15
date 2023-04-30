@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { UserService } from '../user.service';
+import { User } from '../user';
+
 
 @Component({
   selector: 'user-register-page',
@@ -6,10 +9,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent {
-password: any;
-username: any;
-  register() {
-  throw new Error('Method not implemented.');
-  }
 
+  constructor(private userService: UserService) { }
+
+  users: User[] = []
+
+  addUser(username: string, password: string): void {
+    username = username.trim();
+    this.userService.addUser({ username, password } as User)
+      .subscribe(user =>{
+        this.users.push(user);
+      });
+  }
 }
