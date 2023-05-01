@@ -17,16 +17,19 @@ export class CheckoutComponent {
 
   checkout(): void {
     console.log('Checkout button clicked');
+    // TODO: Implement checkout logic here
   }
-  userhasMoney(wallet:number, value:number): void {
+  userhasMoney(username:string, sumitemValue:number): void {//itemVal
     console.log('Checkout button clicked');
     
-    var hasMoney = this.userService.hasMoney(wallet,wallet); 
-    if(hasMoney){
+    var user = this.userService.getUserByUsername(username); 
+    if(user.wallet >= sumitemValue){
       console.log('tem grana, pode continuar!');
-      // TODO: Implement checkout logic here
+      //alert("Com grana")
+      // TODO me deem a lista que eu add 
     }else{
       console.log('Sem grana!');
+      //alert("se grana!")
     }
     
   }
