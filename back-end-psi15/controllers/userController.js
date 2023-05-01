@@ -15,9 +15,7 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 // Display detail page for a specific Client.
 exports.user_detail = asyncHandler(async (req, res, next) => {
 
-    const userInstance = await User.findById(req.params.id)
-    .populate("username")
-    .exec();
+    const userInstance = User.find({ username: req.params.id}).exec();
 
     if (clientInstance === null) {
         // No results.
@@ -26,7 +24,7 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
         return res.status(404).send('Client not found');
       }
 
-    res.send(userInstance);
+    res.json(userInstance);
 
 });
 
@@ -60,7 +58,6 @@ exports.user_create_post = [
         return;
       }
         await author.save();
-        //res.redirect("/client");
       }
     ),
   ];
