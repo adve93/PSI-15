@@ -3,10 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
-
+var cors = require('cors')
 
 
 var app = express();
@@ -34,7 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/", indexRouter);
 app.use("/user", userRouter);
+app.use(cors())
 
+app.options('*', cors()) 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,6 +51,20 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
+
+app.get('/', (req, res) => {
+  // Set the 'Access-Control-Allow-Origin' header to allow requests from any origin
+  res.send('Hello, World!');
 });
 
 module.exports = app;

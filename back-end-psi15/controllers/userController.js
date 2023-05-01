@@ -5,8 +5,7 @@ const { body, validationResult } = require("express-validator");
 
 // Display list of all User.
 exports.user_list = asyncHandler(async (req, res, next) => {
-    const allUsers = await User.find({}, "username games")
-    .populate("username")
+    const allUsers = User.find({}, "username")
     .exec();
 
     res.send(allUsers);

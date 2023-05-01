@@ -9,7 +9,7 @@ import { User } from './user';
 })
 export class UserService {
 
-  private backEnd = 'http://localhost:3065';
+  //private backEnd = 'http://localhost:3000';
 
     constructor (
       private http: HttpClient,
@@ -18,11 +18,8 @@ export class UserService {
     /**
      * POST: add a new user to the server
      */  
-    addUser(user: User): Observable<User> {
-      return this.http.post<User>(this.backEnd, this.httpOptions).pipe(
-        tap((newUser: User) => this.log(`added a new user w/ id=${newUser.id}`)),
-        catchError(this.handleError<User>('addUser'))
-      );
+    addUser(user: User) {
+      this.http.post('http://localhost:3000/user/post', user);
     }
 
   

@@ -12,13 +12,11 @@ export class RegisterPageComponent {
 
   constructor(private userService: UserService) { }
 
-  users: User[] = []
-
   addUser(username: string, password: string): void {
-    username = username.trim();
-    this.userService.addUser({ username, password } as User)
-      .subscribe(user =>{
-        this.users.push(user);
-      });
+    const user: User = {
+      username: username,
+      password: password
+    };
+    this.userService.addUser(user)
   }
 }
