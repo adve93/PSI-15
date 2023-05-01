@@ -59,20 +59,3 @@ exports.user_create_post = [
     ),
   ];
   
-  exports.login_user = asyncHandler(async (req, res, next) => {
-    username = req.body.username;
-    password = req.body.password;
-    const user = await User.findOne({username});
-    
-  if (!user) { // nao existe
-    res.send(-1);
-    return;
-  }
-   
-   if (!password == user.password) { // dados invalidos
-    res.send(0);
-    return;
-  }else{
-    res.send(1); //logged
-  }
-});
