@@ -15,7 +15,7 @@ username: any;
 password: any;
 login(username: string, password: string) {
   username = username.trim();
-  var user = this.userService.getUserByUsername(username) 
+  var user = this.userService.getUserByUsername(username).subscribe();
   if(!user)
     console.log("user não existe!")// mensagem de erro tem de ser passada de aluma forma
     // alert.log("user não existe!")

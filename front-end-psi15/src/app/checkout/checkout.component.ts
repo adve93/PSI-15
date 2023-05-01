@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -22,8 +23,9 @@ export class CheckoutComponent {
   userhasMoney(username:string, sumitemValue:number): void {//itemVal
     console.log('Checkout button clicked');
     
-    var user = this.userService.getUserByUsername(username); 
-    if(user.credit >= sumitemValue){
+    const user = this.userService.getUserByUsername(username);
+    
+    if((user as any).credit >= sumitemValue){
       console.log('tem grana, pode continuar!');
       //alert("Com grana")
       // TODO me deem a lista que eu add 
