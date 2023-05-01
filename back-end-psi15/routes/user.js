@@ -13,4 +13,5 @@ router.get("/post", user_controller.user_create_post);
 
 router.get("/:id", user_controller.user_detail);
 
+router.get("/:hascredit", user_controller.user_has_credit);
 module.exports = router;

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   username: { type: String, required: true, minLength: 3 },
   password: { type: String, required: true, minLength: 8 },
-  //games: { type: String},
+  credit: { type: Number},
 });
 
 

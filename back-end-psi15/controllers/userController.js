@@ -64,7 +64,16 @@ exports.user_create_post = [
       }
     ),
   ];
-  
+  exports.user_has_credit = asyncHandler(async (req, res, next) => {
+
+    const userInstance = await User.findById(req.params.id);
+
+    if(req.body.credit >= userInstance.credit){
+      res.send(true);
+    }
+    else{
+      res.send(false);
+    }
 
 
-
+});
