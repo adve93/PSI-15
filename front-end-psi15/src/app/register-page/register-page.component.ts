@@ -13,10 +13,9 @@ export class RegisterPageComponent {
   constructor(private userService: UserService) { }
 
   addUser(username: string, password: string): void {
-    const user: User = {
-      username: username,
-      password: password
-    };
-    this.userService.addUser(user)
+    const userAdded = this.userService.addUser(username, password);
+    userAdded.subscribe((user) => {
+      console.log(user);
+    });
   }
 }
