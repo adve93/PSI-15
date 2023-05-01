@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 const User = require("../models/user");
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require("express-validator");
@@ -18,13 +19,6 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
     const userInstance = await User.findById(req.params.id)
     .populate("username")
     .exec();
-
-    if (clientInstance === null) {
-        // No results.
-        const err = new Error("Client not found");
-        err.status = 404;
-        return res.status(404).send('Client not found');
-      }
 
     res.send(userInstance);
 
@@ -64,16 +58,6 @@ exports.user_create_post = [
       }
     ),
   ];
-  exports.user_has_credit = asyncHandler(async (req, res, next) => {
 
-    const userInstance = await User.findById(req.params.id);
+  
 
-    if(req.body.credit >= userInstance.credit){
-      res.send(true);
-    }
-    else{
-      res.send(false);
-    }
-
-
-});
