@@ -1,1 +1,99 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+
+*{
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+h1 {
+    color: #34568B;
+    font-size: 2.5rem;
+}
+    
+h2 {
+    color: #293241;
+    font-size: 2rem;
+    margin-top: 1.5rem;
+}
+    
+h3 {
+    color: #8D99AE;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+    
+body {
+    background-color: #F7FFF7;
+    color: #293241;
+    line-height: 1.5;
+    max-width: 1000px;
+    margin-left: 40px;
+}
+    
+a {
+    color: #34568B;
+    text-decoration: none;
+}
+    
+a:hover {
+    color: #8D99AE;
+}
+    
+button {
+    background-color: #8D99AE;
+    border: none;
+    border-radius: 4px;
+    color: #F7FFF7;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+    
+button:hover {
+    background-color: #293241;
+}
+    
+button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: auto;
+}
+    
+/* Navigation link styles */
+nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-right: 10px;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #F7FFF7;
+    color: #293241;
+    border-radius: 4px;
+    border: 1px solid #8D99AE;
+}
+    
+nav a:hover {
+    color: #8D99AE;
+    background-color: #34568B;
+}
+    
+nav a.active {
+    background-color: #34568B;
+    color: #F7FFF7;
+}
+    
+hr {
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid #8D99AE;
+}
+    
+input[type="text"] {
+    width: 100%;
+    padding: .5rem;
+    border-radius: 4px;
+    border: 1px solid #8D99AE;
+    font-size: 1rem;
+}
