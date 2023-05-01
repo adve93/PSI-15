@@ -15,10 +15,13 @@ export class CheckoutComponent {
   ngOnInit(): void {
   }
 
-  checkout(username:string, wallet:number): void {
+  checkout(): void {
     console.log('Checkout button clicked');
-    username = username.trim();
-    var hasMoney = this.userService.hasMoney(username,wallet); 
+  }
+  userhasMoney(wallet:number, value:number): void {
+    console.log('Checkout button clicked');
+    
+    var hasMoney = this.userService.hasMoney(wallet,wallet); 
     if(hasMoney){
       console.log('tem grana, pode continuar!');
       // TODO: Implement checkout logic here
