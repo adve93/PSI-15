@@ -19,7 +19,7 @@ export class UserService {
      * POST: add a new user to the server
      */  
     addUser(user: User) {
-      this.http.post('http://localhost:3000/user/post', user);
+      this.http.post('http://localhost:3000/user/create', user);
     }
 
   

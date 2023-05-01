@@ -9,8 +9,8 @@ router.get('/', function(req, res, next) {
 
 router.get("/list", user_controller.user_list);
 
-router.get("/post", user_controller.user_create_post);
+router.post("/create", user_controller.user_create_post);
 
-router.get("/:id", user_controller.user_detail);
+router.get("/:username", user_controller.user_detail);
 
 module.exports = router;
