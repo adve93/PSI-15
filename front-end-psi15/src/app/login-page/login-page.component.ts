@@ -12,20 +12,16 @@ export class LoginPageComponent {
   password: any;
   login(username: string, password: string) {
     username = username.trim();
-    var isLoginValid = this.userService.login({ username, password }) // retorna um inteiro entre -1, 0 e 1
-    switch(isLoginValid){
-      case -1: // utilizador nao existe
-      alert("utiizadr inserido não existe"); // podemos pergunar que se ele quer inserir o utilizador
-      break;
-      case 0: //utilizador com dados errados
-      alert("dados errados!")
-      break;
-      case 1: // utilizador logado
-      alert("logado!");// tratar disso melhor no frontend
-      // TODO redirecionar a pagina do perfil quando a mesma for criada
-      break;
-      //so pode ter esses tres valores
-    }
+    var user = this.userService.getUserByUsername(username) 
+    if(!user)
+      console.log("user não existe!")// mensagem de erro tem de ser passada de aluma forma
+      // alert.log("user não existe!")
+    if(user.password != password){
+      console.log("dados incorretos!")// mensagem de erro tem de ser passada de aluma forma
+        // alert.log("dados incorretos!")
+    }else
+    console.log("Logado!")// mensagem de erro tem de ser passada de aluma forma
+      // alert.log("Logado!")
   }
-
+  // TODO provavelmente tem mais coisa a se fazer, redirecionar para a dashboard(?)
 }
