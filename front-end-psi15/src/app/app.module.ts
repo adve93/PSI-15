@@ -8,7 +8,8 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SearchItemsComponent } from './search-items/search-items.component'; 
+import { SearchItemsComponent } from './search-items/search-items.component';
+import { CheckoutComponent } from './checkout/checkout.component'; 
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SearchItemsComponent } from './search-items/search-items.component';
     LoginPageComponent,
     DashboardComponent,
     SearchItemsComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
