@@ -26,12 +26,12 @@ export class CheckoutComponent {
     const user = this.userService.getUserByUsername(username);
     
     if((user as any).credit >= sumitemValue){
-      console.log('tem grana, pode continuar!');
-      //alert("Com grana")
+      console.log('tem Dinheiro, pode continuar!');
+      //alert("Com Dinheiro")
       // TODO me deem a lista que eu add 
     }else{
-      console.log('Sem grana!');
-      //alert("se grana!")
+      console.log('Sem Dinheiro!');
+      //alert("sem Dinheiro!")
     }
     
   }
