@@ -31,6 +31,7 @@ export class LoginPageComponent {
         (userPassword: string) => {
           if(userPassword === password) {
             console.log('password correct');
+            this.userService.setLoggedInUser(username);
           } else {
             console.log('password incorrect');
           }
