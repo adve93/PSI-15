@@ -69,4 +69,3 @@ exports.user_delete_get = asyncHandler(async (req, res, next) => {
   }
 
 });
-

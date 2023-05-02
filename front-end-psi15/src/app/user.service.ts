@@ -39,8 +39,8 @@ export class UserService {
     return this.http.get(`${this.backEnd}/user/list`);
   }
 
-  getUserByUsername(username: string) {
-    return this.http.get(`${this.backEnd}/user/${username}`);
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(`${this.backEnd}/user/${username}`);
   }
 
   postUpdateUser(username: string, password: string) {
@@ -54,6 +54,5 @@ export class UserService {
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
   }
-
 
 }

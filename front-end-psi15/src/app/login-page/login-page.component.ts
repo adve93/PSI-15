@@ -13,10 +13,8 @@ import { User } from '../user';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
-
   constructor(private router: Router, private userService: UserService) { }
-
-
+  
   login(username: string, password: string) {
     username = username.trim();
     var user = this.userService.getUserByUsername(username) 
@@ -26,7 +24,6 @@ export class LoginPageComponent {
       user.pipe(
         map(user => user as User),
         map(user => user.password)
-
       )
       .subscribe(
         (userPassword: string) => {
@@ -43,7 +40,7 @@ export class LoginPageComponent {
     }
       
   }
-
+  
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
