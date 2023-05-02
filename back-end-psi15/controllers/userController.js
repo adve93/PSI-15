@@ -14,7 +14,6 @@ exports.user_list = asyncHandler(async (req, res, next) => {
     }
     
 });
-
 // Post new User.
 exports.user_create_post = asyncHandler(async (req, res, next) => {
 
@@ -70,5 +69,5 @@ exports.user_delete_get = asyncHandler(async (req, res, next) => {
   }
 
 });
-
 });
+

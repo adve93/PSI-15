@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 
 import { UserService } from '../user.service';
 
+
 @Component({
   selector: 'login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
+
   constructor(private router: Router, private userService: UserService) { }
 username: any;
 password: any;
@@ -31,5 +33,4 @@ login(username: string, password: string) {
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
-
 }
