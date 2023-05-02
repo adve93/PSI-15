@@ -31,10 +31,11 @@ export class LoginPageComponent {
       .subscribe(
         (userPassword: string) => {
           if(userPassword === password) {
-            console.log('password correct');
+            window.alert('passsword is correct!');
             this.userService.setLoggedInUser(username);
+            this.goToDashboard();
           } else {
-            console.log('password incorrect');
+            window.alert('passsword is incorrect!');
           }
         },
         error => console.log('Error', error)
@@ -42,8 +43,6 @@ export class LoginPageComponent {
     }
       
   }
-// TODO provavelmente tem mais coisa a se fazer, redirecionar para a dashboard(?)
-
 
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
