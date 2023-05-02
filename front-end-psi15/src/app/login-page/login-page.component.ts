@@ -14,7 +14,7 @@ import { User } from '../user';
 })
 export class LoginPageComponent {
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor( private userService: UserService) { }
   
   login(username: string, password: string) {
     

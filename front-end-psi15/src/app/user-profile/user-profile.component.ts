@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit{
 
   getUser() {
     var username = <string>this.userService.getLoggedInUser();
-    username = username.trim();
+    console.log(username);
     var tempUser  = this.userService.getUserByUsername(username).subscribe(
       user => {
         this.user = user;
@@ -36,4 +36,9 @@ export class UserProfileComponent implements OnInit{
       console.log("user não existe!")
     }
   }
+
+  showNotImplemented() {
+    window.alert('Feature not implemented.');
+  }
+  
 }

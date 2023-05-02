@@ -7,6 +7,7 @@ var indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
 const itemRouter = require("./routes/item");
 var cors = require('cors')
+const cookieParser = require('cookie-parser');
 
 
 var app = express();
@@ -32,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cookieParser());
 //Routes
 app.use("/", indexRouter);
 app.use("/user", userRouter);
