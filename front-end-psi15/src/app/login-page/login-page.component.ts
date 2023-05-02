@@ -15,20 +15,22 @@ username: any;
 password: any;
 login(username: string, password: string) {
   username = username.trim();
-
-  var user = this.userService.getUserByUsername(username).subscribe();
-
+  var user = this.userService.getUserByUsername(username);
   if(!user)
-    console.log("user não existe!")// mensagem de erro tem de ser passada de aluma forma
+    console.log("user não existe!")// mensagem de erro tem de ser passada de alguma forma
     // alert.log("user não existe!")
   if((user as any).password != password){
-    console.log("dados incorretos!")// mensagem de erro tem de ser passada de aluma forma
+    console.log("dados incorretos!")// mensagem de erro tem de ser passada de alguma forma
       // alert.log("dados incorretos!")
-  }else
-  console.log("Logado!")// mensagem de erro tem de ser passada de aluma forma
-    // alert.log("Logado!")*/
+  }else{
+   
+  console.log("Logado!")// mensagem de erro tem de ser passada de alguma forma
+    // alert.log("Logado!")
+    // TODO provavelmente tem mais coisa a se fazer, redirecionar para a dashboard(?)
+    this.goToDashboard();
+  }
 }
-// TODO provavelmente tem mais coisa a se fazer, redirecionar para a dashboard(?)
+
 
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
