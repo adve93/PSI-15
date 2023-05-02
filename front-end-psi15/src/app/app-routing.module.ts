@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent},
 
   { path: 'dashboard', component: DashboardComponent}
+  //{ path: 'itemDetail/:title', component: ItemDetailComponent}
 
 
 ];
