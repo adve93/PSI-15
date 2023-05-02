@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { MessageService } from './message.service';
 import { User } from './user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,37 @@ export class UserService {
 
   private loggedInUser: String | null = null;
 
-  constructor (private http: HttpClient) {}
+  constructor (private http: HttpClient, private router: Router) {}
 
   addUser(username: string, password: string) {
     const user = {
       username: username,
       password: password
     };
-    return this.http.post(`${this.backEnd}/user/create`, user);
+    this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 422) {
+          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
+          const errorMessages = errors[0].join(', ');
+          window.alert(errorMessages);
+        }
+        return throwError(error.message);
+      })
+    ).subscribe(
+      (response: HttpResponse<any>) => {
+        if(response.status === 200){
+          window.alert('User succesefully created! Please login to enter the dashboard.');
+          this.router.navigate(['/user-login']);
+        }
+      },
+      (error) => {
+        console.log('Error:', error);
+      }
+    );
+  }
+
+  private isAlphanumeric(str: string): boolean {
+    return /^[a-z0-9]+$/i.test(str);
   }
 
   setLoggedInUser(username: String){
@@ -48,7 +72,11 @@ export class UserService {
       username: username,
       password: password
     };
-    return this.http.post(`${this.backEnd}/user/update/${username}`, user);
+    const response =  this.http.post(`${this.backEnd}/user/update/${username}`, user);
+
+
+
+
   }
 
   deleteUserByUsername(username: string) {

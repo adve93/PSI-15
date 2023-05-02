@@ -35,8 +35,6 @@ exports.user_create_post = [
 
   asyncHandler(async (req, res, next) => {
 
-    Alphanumeric
-
     // Extract the validation errors from a request.
     const errors = validationResult(req);
     
