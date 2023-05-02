@@ -37,9 +37,8 @@ export class UserService {
     return this.http.post(`${this.backEnd}/user/update/${username}`, user);
   }
 
-  getDeleteUserByUsername(username: string) {
+  deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
   }
-
 
 }

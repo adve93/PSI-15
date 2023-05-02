@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 const User = require("../models/user");
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require("express-validator");
@@ -19,14 +18,14 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 exports.user_create_post = asyncHandler(async (req, res, next) => {
 
   // Create Author object with escaped and trimmed data
-    const user = new User(req.body);
+
+    var user = new User(req.body);
     await user.save()
-    .exec()
     .then(user => {
-      res.status(200).json("Added successfully!")
+      res.status(200).json("Added successfully!");
     })
     .catch(err => {
-      res.send("Error")
+      res.status(500).send('Failed to create new user');
     });
   });
 
@@ -39,7 +38,6 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
     } catch(error) {
       console.error(error);
     }
-
 });
 
 // Update existing User. Saldo e lista de jogos não alterados nesta função pq vão ter funções especificas.
@@ -52,7 +50,6 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
     userInstance.username = req.body.username;
     userInstance.password = req.body.password;
     await userInstance.save()
-    .exec()
     .then(userInstance => {
       res.json("Updated successfully!")
     })
@@ -73,4 +70,3 @@ exports.user_delete_get = asyncHandler(async (req, res, next) => {
   }
 
 });
-

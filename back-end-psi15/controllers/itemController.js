@@ -17,16 +17,15 @@ exports.item_list = asyncHandler(async (req, res, next) => {
 // Post new item.
 exports.item_create_post = asyncHandler(async (req, res, next) => {
 
-    const item = new Item(req.body);
-    await item.save()
-    .exec()
-    .then(item => {
-      res.status(200).json("Added successfully!")
-    })
-    .catch(item => {
-      res.send("Error")
-    });
+  const item = new Item(req.body);
+  await item.save()
+  .then(item => {
+    res.status(200).json("Added successfully!")
+  })
+  .catch(item => {
+    res.send("Error")
   });
+});
 
 
 // Display detail page for a specific Item. Returns a item or null if item does not exist.
@@ -54,7 +53,6 @@ exports.item_update_post = asyncHandler(async (req, res, next) => {
     itemInstance.price = req.body.price;
     itemInstance.classification = req.body.classification;
     await itemInstance.save()
-    .exec()
     .then(itemInstance => {
       res.json("Updated successfully!")
     })
