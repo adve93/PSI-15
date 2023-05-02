@@ -13,7 +13,6 @@ import { User } from '../user';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
-
   constructor(private router: Router, private userService: UserService) { }
   
   login(username: string, password: string) {
@@ -25,15 +24,15 @@ export class LoginPageComponent {
       user.pipe(
         map(user => user as User),
         map(user => user.password)
-
       )
       .subscribe(
         (userPassword: string) => {
           if(userPassword === password) {
-            console.log('password correct');
+            window.alert('passsword is correct!');
             this.userService.setLoggedInUser(username);
+            this.goToDashboard();
           } else {
-            console.log('password incorrect');
+            window.alert('passsword is incorrect!');
           }
         },
         error => console.log('Error', error)
