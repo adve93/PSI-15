@@ -5,8 +5,9 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   username: { type: String, required: true, minLength: 3, unique: true },
-  password: { type: String, required: true, minLength: 8},
-  //games: { type: String},
+  password: { type: String, required: true, minLength: 8, unique: true},
+  wallet: {type: String, default:"200"},
+  games: [{ type: Schema.Types.ObjectId, ref: "Item"}],
   credit: { type: Number}
 });
 

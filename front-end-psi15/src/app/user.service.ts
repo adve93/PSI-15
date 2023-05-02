@@ -28,4 +28,18 @@ export class UserService {
   getUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/${username}`);
   }
+
+  postUpdateUser(username: string, password: string) {
+    const user = {
+      username: username,
+      password: password
+    };
+    return this.http.post(`${this.backEnd}/user/update/${username}`, user);
+  }
+
+  deleteUserByUsername(username: string) {
+    return this.http.get(`${this.backEnd}/user/delete/${username}`);
+  }
+
+
 }
