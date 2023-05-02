@@ -28,7 +28,6 @@ exports.item_create_post = asyncHandler(async (req, res, next) => {
 });
 
 
-
 // Display detail page for a specific Item. Returns a item or null if item does not exist.
 exports.item_detail = asyncHandler(async (req, res, next) => {
     try {

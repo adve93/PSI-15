@@ -18,6 +18,7 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 exports.user_create_post = asyncHandler(async (req, res, next) => {
 
   // Create Author object with escaped and trimmed data
+
     var user = new User(req.body);
     await user.save()
     .then(user => {
@@ -69,9 +70,3 @@ exports.user_delete_get = asyncHandler(async (req, res, next) => {
   }
 
 });
-
-
-
-
-
-

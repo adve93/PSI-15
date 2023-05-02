@@ -1,4 +1,19 @@
 <h1>Checkout</h1>
+
+
+<header>
+  <nav>
+    <div class="checkout">
+      <button (click)="checkout()">Checkout</button>
+    </div>
+
+    <div class= "links">
+      <a routerLink="/dashboard">Home
+        <span class="material-symbols-outlined">home</span>
+        </a>
+    </div>
+  </nav>
+</header>
 <!--
 <ul>
   <li *ngFor="let item of items">
@@ -8,4 +23,3 @@
 
 <p>Total: {{ total | currency }}</p>
 -->
-<button (click)="checkout()">Checkout</button>

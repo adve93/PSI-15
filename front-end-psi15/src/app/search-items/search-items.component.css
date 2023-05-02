@@ -45,6 +45,18 @@ h1 {
   }
   
   a:hover {
-    color: #0056b3;
+    color: #fff;
+
   }
+  header nav{
+    display: flex;
+    flex-direction: row ;
+    justify-content:space-between;
+}
+.search{
+    display: flex;
+    flex-direction: row ;
+    align-items: center;
+    gap: 5px;
+}
   

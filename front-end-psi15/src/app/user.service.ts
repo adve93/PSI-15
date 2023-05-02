@@ -41,5 +41,4 @@ export class UserService {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
   }
 
-
 }
