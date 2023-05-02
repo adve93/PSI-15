@@ -15,7 +15,6 @@ router.post("/update/:username", user_controller.user_update_post);
 
 router.get("/:username", user_controller.user_detail);
 
-
 router.get("/delete/:username", user_controller.user_delete_get);
 
 module.exports = router;

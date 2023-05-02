@@ -1,15 +1,16 @@
 <div><h1>Login</h1></div>
 <div>
-  <form (submit)="login(usernameInput.value, passwordInput.value)">
-      <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" #usernameInput>
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" #passwordInput>
-      </div>
-      <button type="submit" (click)="goToDashboard()">Register</button>
-    </form>
 
+    <form (submit)="login(username.value, password.value)">
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" #username>
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" #password>
+        </div>
+        <button type="submit">Login</button>
+      </form>
 </div>
+

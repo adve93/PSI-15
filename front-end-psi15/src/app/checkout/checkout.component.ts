@@ -20,6 +20,7 @@ export class CheckoutComponent {
     console.log('Checkout button clicked');
     // TODO: Implement checkout logic here
   }
+
   userhasMoney(username:string, sumitemValue:number): void {//itemVal
     console.log('Checkout button clicked');
     
@@ -33,7 +34,6 @@ export class CheckoutComponent {
       console.log('Sem Dinheiro!');
       //alert("sem Dinheiro!")
     }
-    
-  }
   
+  }
 }
