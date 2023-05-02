@@ -11,6 +11,8 @@ export class UserService {
 
   private backEnd = 'http://localhost:3000';
 
+  private loggedInUser: String | null = null;
+
   constructor (private http: HttpClient) {}
 
   addUser(username: string, password: string) {
@@ -21,12 +23,24 @@ export class UserService {
     return this.http.post(`${this.backEnd}/user/create`, user);
   }
 
+  setLoggedInUser(username: String){
+    this.loggedInUser = username;
+  }
+
+  getLoggedInUser(): String | null{
+    return this.loggedInUser;
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedInUser != null;
+  }
+
   getUserList() {
     return this.http.get(`${this.backEnd}/user/list`);
   }
 
-  getUserByUsername(username: string) {
-    return this.http.get(`${this.backEnd}/user/${username}`);
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(`${this.backEnd}/user/${username}`);
   }
 
   postUpdateUser(username: string, password: string) {
