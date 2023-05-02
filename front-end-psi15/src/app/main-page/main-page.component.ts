@@ -15,7 +15,7 @@ export class MainPageComponent {
   }
 
   goToLogin(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/user-login']);
   }
 
 }

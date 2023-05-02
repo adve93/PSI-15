@@ -6,56 +6,69 @@ const { body, validationResult } = require("express-validator");
 
 // Display list of all User.
 exports.user_list = asyncHandler(async (req, res, next) => {
-    const allUsers = await User.find({}, "username games")
-    .populate("username")
-    .exec();
-
-    res.send(allUsers);
+    try {
+      const allUsers = await User.find({}, "username").exec();
+      res.send(allUsers);
+    } catch(error) {
+      console.error(error);
+    }
+    
 });
-
-// Display detail page for a specific Client.
-exports.user_detail = asyncHandler(async (req, res, next) => {
-
-    const userInstance = await User.findById(req.params.id)
-    .populate("username")
-    .exec();
-
-    res.send(userInstance);
-
-});
-
-
 // Post new User.
-exports.user_create_post = [
-    
-    body("username")
-      .trim()
-      .isLength({ min: 3 })
-      .escape()
-      .isAlphanumeric(),
-    body("password")
-      .trim()
-      .isLength({ min: 8 })
-      .escape(),
-    
-    // Process request after validation and sanitization.
-    asyncHandler(async (req, res, next) => {
+exports.user_create_post = asyncHandler(async (req, res, next) => {
 
-      const errors = validationResult(req);
-      // Extract the validation errors from a request.
-  
-      // Create Author object with escaped and trimmed data
-      const user = new User({
-        username: req.body.username,
-        password: req.body.password,
-      });
+  // Create Author object with escaped and trimmed data
+    const user = new User(req.body);
+    await user.save()
+    .exec()
+    .then(user => {
+      res.status(200).json("Added successfully!")
+    })
+    .catch(err => {
+      res.send("Error")
+    });
+  });
 
-      if (!errors.isEmpty()) {
-        return;
-      }
-        await author.save();
-        //res.redirect("/client");
-      }
-    ),
-  ];
-  
+
+// Display detail page for a specific User. Returns a user or null if user does not exist.
+exports.user_detail = asyncHandler(async (req, res, next) => {
+    try {
+      const userInstance = await User.findOne({ username: req.params.username}).exec();
+      res.json(userInstance);
+    } catch(error) {
+      console.error(error);
+    }
+});
+
+// Update existing User. Saldo e lista de jogos não alterados nesta função pq vão ter funções especificas.
+exports.user_update_post = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.body.username}).exec();
+  if(!userInstance) 
+    return next(new Error('Could not find user.'))
+  else {
+    userInstance.username = req.body.username;
+    userInstance.password = req.body.password;
+    await userInstance.save()
+    .exec()
+    .then(userInstance => {
+      res.json("Updated successfully!")
+    })
+    .catch(err => {
+      res.send("Error")
+    });
+  }
+});
+
+// Deleted existing user. Returns a error if no user found.
+exports.user_delete_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOneAndRemove({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return next(new Error('Could not find user.'))
+  else {
+    res.json("Deleted successfully!")
+  }
+
+});
+

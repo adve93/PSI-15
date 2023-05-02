@@ -3,13 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
-
+const itemRouter = require("./routes/item");
+var cors = require('cors')
 
 
 var app = express();
+app.use(cors());
 
 // Set up mongoose connection
 const mongoose = require("mongoose");
@@ -32,9 +33,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Routes
 app.use("/", indexRouter);
 app.use("/user", userRouter);
-
+app.use("/item", itemRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,6 +52,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.get('/', (req, res) => {
+  // Set the 'Access-Control-Allow-Origin' header to allow requests from any origin
+  res.send('Hello, World!');
 });
 
 module.exports = app;
