@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -17,17 +18,22 @@ export class CheckoutComponent {
 
   checkout(): void {
     console.log('Checkout button clicked');
+    // TODO: Implement checkout logic here
   }
-  userhasMoney(wallet:number, value:number): void {
-    /*
+  
+  userhasMoney(username:string, sumitemValue:number): void {//itemVal
     console.log('Checkout button clicked');
     
-    /var hasMoney = this.userService.hasMoney(wallet,wallet); 
-    if(hasMoney){
-      console.log('tem grana, pode continuar!');
-      // TODO: Implement checkout logic here
+    const user = this.userService.getUserByUsername(username);
+    
+    if((user as any).credit >= sumitemValue){
+      console.log('tem Dinheiro, pode continuar!');
+      //alert("Com Dinheiro")
+      // TODO me deem a lista que eu add 
+
     }else{
-      console.log('Sem grana!');
+      console.log('Sem Dinheiro!');
+      //alert("sem Dinheiro!")
     }
     */
   }

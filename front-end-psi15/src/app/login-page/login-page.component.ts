@@ -15,7 +15,7 @@ import { User } from '../user';
 export class LoginPageComponent {
 
   constructor(private router: Router, private userService: UserService) { }
-
+  
   login(username: string, password: string) {
     username = username.trim();
     var user = this.userService.getUserByUsername(username) 
@@ -31,6 +31,7 @@ export class LoginPageComponent {
         (userPassword: string) => {
           if(userPassword === password) {
             console.log('password correct');
+            this.userService.setLoggedInUser(username);
           } else {
             console.log('password incorrect');
           }
@@ -40,8 +41,7 @@ export class LoginPageComponent {
     }
       
   }
-// TODO provavelmente tem mais coisa a se fazer, redirecionar para a dashboard(?)
-
+  
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
