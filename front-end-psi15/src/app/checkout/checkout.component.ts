@@ -19,16 +19,16 @@ export class CheckoutComponent {
     console.log('Checkout button clicked');
   }
   userhasMoney(wallet:number, value:number): void {
+    /*
     console.log('Checkout button clicked');
     
-    var hasMoney = this.userService.hasMoney(wallet,wallet); 
+    /var hasMoney = this.userService.hasMoney(wallet,wallet); 
     if(hasMoney){
       console.log('tem grana, pode continuar!');
       // TODO: Implement checkout logic here
     }else{
       console.log('Sem grana!');
     }
-    
+    */
   }
-  
 }
