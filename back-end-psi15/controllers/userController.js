@@ -16,13 +16,17 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 
 // Post new User.
 exports.user_create_post = asyncHandler(async (req, res, next) => {
+
   // Create Author object with escaped and trimmed data
     const user = new User(req.body);
-    await user.save().exec()
+    await user.save()
+    .exec()
+    .then(user => {
+      res.status(200).json("Added successfully!")
+    })
     .catch(err => {
       res.send("Error")
     });
-    res.send("Created the user")
   });
 
 
@@ -34,6 +38,38 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
     } catch(error) {
       console.error(error);
     }
+});
+
+// Update existing User. Saldo e lista de jogos não alterados nesta função pq vão ter funções especificas.
+exports.user_update_post = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return next(new Error('Could not find user.'))
+  else {
+    userInstance.username = req.body.username;
+    userInstance.password = req.body.password;
+    await userInstance.save()
+    .exec()
+    .then(userInstance => {
+      res.json("Updated successfully!")
+    })
+    .catch(err => {
+      res.send("Error")
+    });
+  }
+});
+
+// Deleted existing user. Returns a error if no user found.
+exports.user_delete_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOneAndRemove({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return next(new Error('Could not find user.'))
+  else {
+    res.json("Deleted successfully!")
+  }
+
 });
 
 
