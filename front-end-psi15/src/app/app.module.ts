@@ -13,7 +13,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchItemsComponent } from './search-items/search-items.component';
-import { CheckoutComponent } from './checkout/checkout.component'; 
+import { CheckoutComponent } from './checkout/checkout.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 @NgModule({
   declarations: [
@@ -24,12 +26,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
     DashboardComponent,
     SearchItemsComponent,
     CheckoutComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
