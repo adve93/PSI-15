@@ -42,7 +42,7 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 // Update existing item.
 exports.item_update_post = asyncHandler(async (req, res, next) => {
 
-  const itemInstance = await Item.findOne({ title: req.params.title}).exec();
+  const itemInstance = await Item.findOne({ title: req.body.title}).exec();
   if(!itemInstance) 
     return next(new Error('Could not find user.'))
   else {
