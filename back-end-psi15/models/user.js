@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   password: { type: String, required: true, minLength: 8, unique: true},
   wallet: {type: String, default:"200"},
   games: [{ type: Schema.Types.ObjectId, ref: "Item"}],
+  credit: { type: Number}
 });
 
 

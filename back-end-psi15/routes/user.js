@@ -17,4 +17,6 @@ router.get("/:username", user_controller.user_detail);
 
 router.get("/delete/:username", user_controller.user_delete_get);
 
+router.get("/:hascredit", user_controller.user_has_credit);
+
 module.exports = router;
