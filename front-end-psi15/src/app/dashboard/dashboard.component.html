@@ -1,6 +1,6 @@
 <h1>VideoGame SHOP-GROUP15</h1>
 
-<div>
+<div class="header">
     <header>
         <nav>
             <div>
@@ -15,5 +15,13 @@
             </div>
           </nav>
     </header>
+</div>
+<div class="main">
+    <a *ngFor="let item of items">
+        <!--routerLink="/itemDetail/{{item.title}}"-->
+    <p>{{item.title}}</p>
+    </a>
+
+    
 </div>
 

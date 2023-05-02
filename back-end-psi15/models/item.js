@@ -7,8 +7,8 @@ const ItemSchema = new Schema({
   description: { type: String, required: true, maxLength: 1000},
   platform: { type: String, required: true},
   languages: [{ type: String, required: true}],
-  price: {type: String , requeired: true},
-  classification: {type: String},
+  price: {type: Number , requeired: true},
+  classification: {type: Number},
   title: {type: String, require: true, unique: true},
 });
 

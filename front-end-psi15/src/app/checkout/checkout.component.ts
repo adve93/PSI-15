@@ -35,6 +35,5 @@ export class CheckoutComponent {
       console.log('Sem Dinheiro!');
       //alert("sem Dinheiro!")
     }
-    */
   }
 }
