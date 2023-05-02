@@ -15,16 +15,18 @@ username: any;
 password: any;
 login(username: string, password: string) {
   username = username.trim();
+
   var user = this.userService.getUserByUsername(username).subscribe();
+
   if(!user)
     console.log("user não existe!")// mensagem de erro tem de ser passada de aluma forma
     // alert.log("user não existe!")
-  if(user.password != password){
+  if((user as any).password != password){
     console.log("dados incorretos!")// mensagem de erro tem de ser passada de aluma forma
       // alert.log("dados incorretos!")
   }else
   console.log("Logado!")// mensagem de erro tem de ser passada de aluma forma
-    // alert.log("Logado!")
+    // alert.log("Logado!")*/
 }
 // TODO provavelmente tem mais coisa a se fazer, redirecionar para a dashboard(?)
 
