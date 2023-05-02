@@ -1,8 +1,20 @@
 <h1>Search for Games</h1>
+<header>
+    <nav>
+      <div class="search">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Enter search term">
+        <button (click)="search()">Search</button>
+      </div>
+      
+      <div class= "links">
+        <a routerLink="/dashboard">Home
+          <span class="material-symbols-outlined">home</span>
+          </a>
+      </div>
 
-<input type="text" [(ngModel)]="searchTerm" placeholder="Enter search term">
-<button (click)="search()">Search</button>
 
+    </nav>
+</header>
 
 <!---<ul>
   <li *ngFor="let game of games">
