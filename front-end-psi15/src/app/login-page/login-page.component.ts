@@ -17,32 +17,8 @@ export class LoginPageComponent {
   constructor(private router: Router, private userService: UserService) { }
   
   login(username: string, password: string) {
-    username = username.trim();
-    var user = this.userService.getUserByUsername(username) 
-    if(!user) {
-      console.log("user não existe!")
-    } else {
-      user.pipe(
-        map(user => user as User),
-        map(user => user.password)
-
-      )
-      .subscribe(
-        (userPassword: string) => {
-          if(userPassword === password) {
-            console.log('password correct');
-            this.userService.setLoggedInUser(username);
-          } else {
-            console.log('password incorrect');
-          }
-        },
-        error => console.log('Error', error)
-      )
-    }
-      
-  }
+    
+    this.userService.userLogin(username, password);
   
-  goToDashboard(): void {
-    this.router.navigate(['/dashboard']);
   }
 }

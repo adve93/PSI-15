@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable, catchError, of, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { MessageService } from './message.service';
 import { User } from './user';
 import { Router } from '@angular/router';
@@ -27,6 +27,9 @@ export class UserService {
           const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
           const errorMessages = errors[0].join(', ');
           window.alert(errorMessages);
+        }
+        if (error.status === 500) {
+          window.alert('Username already taken.');
         }
         return throwError(error.message);
       })
@@ -73,11 +76,32 @@ export class UserService {
       password: password
     };
     const response =  this.http.post(`${this.backEnd}/user/update/${username}`, user);
-
-
-
-
   }
+
+  userLogin(username: string, password: string){
+    var user = this.getUserByUsername(username);
+    if(!user) {
+      console.log("user não existe!")
+    } else {
+      user.pipe(
+        map(user => user as User),
+        map(user => user.password)
+      )
+      .subscribe(
+        (userPassword: string) => {
+          if(userPassword === password) {
+            window.alert('Succesfully logged in!');
+            this.setLoggedInUser(username);
+            this.router.navigate(['/dashboard']);
+          } else {
+            window.alert('Password incorrect!');
+          }
+        },
+        error => console.log('Error', error)
+      )
+    }
+  }
+
 
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
