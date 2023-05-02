@@ -18,7 +18,7 @@ exports.item_list = asyncHandler(async (req, res, next) => {
 exports.item_create_post = asyncHandler(async (req, res, next) => {
 
   const item = new Item(req.body);
-  item.save()
+  await item.save()
   .then(item => {
     res.status(200).json("Added successfully!")
   })
@@ -53,7 +53,7 @@ exports.item_update_post = asyncHandler(async (req, res, next) => {
     itemInstance.languages = req.body.languages;
     itemInstance.price = req.body.price;
     itemInstance.classification = req.body.classification;
-    itemInstance.save()
+    await itemInstance.save()
     .then(itemInstance => {
       res.json("Updated successfully!")
     })

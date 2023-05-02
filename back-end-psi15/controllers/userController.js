@@ -18,15 +18,16 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 exports.user_create_post = asyncHandler(async (req, res, next) => {
 
   // Create Author object with escaped and trimmed data
-    let user = new User(req.body);
-    user.save()
+    var user = new User(req.body);
+    await user.save()
     .then(user => {
-      res.status(200).json("Added successfully!")
+      res.status(200).json("Added successfully!");
     })
     .catch(err => {
-      res.send("error")
+      res.status(500).send('Failed to create new user');
     });
   });
+
 
 // Display detail page for a specific User. Returns a user or null if user does not exist.
 exports.user_detail = asyncHandler(async (req, res, next) => {
@@ -47,7 +48,7 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
   else {
     userInstance.username = req.body.username;
     userInstance.password = req.body.password;
-    userInstance.save()
+    await userInstance.save()
     .then(userInstance => {
       res.json("Updated successfully!")
     })
