@@ -18,9 +18,10 @@ export class RegisterPageComponent {
     userAdded.subscribe((user) => {
       console.log(user);
     });
+    window.alert("User created. Please login to acess the platform!");
   }
 
-  goToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+  goToMainPage(): void {
+    this.router.navigate(['/main-page']);
   }
 }

@@ -11,6 +11,8 @@ export class UserService {
 
   private backEnd = 'http://localhost:3000';
 
+  private loggedInUser: String | null = null;
+
   constructor (private http: HttpClient) {}
 
   addUser(username: string, password: string) {
@@ -19,6 +21,18 @@ export class UserService {
       password: password
     };
     return this.http.post(`${this.backEnd}/user/create`, user);
+  }
+
+  setLoggedInUser(username: String){
+    this.loggedInUser = username;
+  }
+
+  getLoggedInUser(): String | null{
+    return this.loggedInUser;
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedInUser != null;
   }
 
   getUserList() {
