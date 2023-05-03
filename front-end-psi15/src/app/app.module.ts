@@ -8,6 +8,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 
 
 import { UserService } from './user.service';
+import { ItemServiceService } from './item-service.service';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,7 +34,7 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService],
+  providers: [UserService, ItemServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

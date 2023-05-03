@@ -9,9 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ItemServiceService {
 
-  private backEnd = 'http://localhost:3000';
-
-  private loggedInUser: String | null = null;
+  private backEnd = 'http://localhost:3065';
 
   constructor (private http: HttpClient, private router: Router) {}
 

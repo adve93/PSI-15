@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
-import { MessageService } from './message.service';
 import { User } from './user';
 import { Router } from '@angular/router';
 
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
 
-  private backEnd = 'http://localhost:3000';
+  private backEnd = 'http://localhost:3065';
 
   private loggedInUser: String | null = null;
 
@@ -45,7 +44,6 @@ export class UserService {
       }
     );
   }
-
 
   setLoggedInUser(username: String){
     this.loggedInUser = username;

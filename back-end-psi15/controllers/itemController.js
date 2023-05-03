@@ -17,7 +17,7 @@ exports.item_list = asyncHandler(async (req, res, next) => {
 // Post new item.
 exports.item_create_post = asyncHandler(async (req, res, next) => {
 
-  const item = new Item(req.body);
+  var item = new Item(req.body);
   await item.save()
   .then(item => {
     res.status(200).json("Added successfully!")

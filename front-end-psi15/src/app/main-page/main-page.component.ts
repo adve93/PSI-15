@@ -9,11 +9,8 @@ import { ItemServiceService } from '../item-service.service';
 })
 export class MainPageComponent {
 
-  constructor(private router: Router, private itemService: ItemServiceService) {}
+  constructor(private router: Router) {}
 
-  ngOnInit(){
-    this.itemService.addTestItems();
-  }
 
   goToRegister(): void {
     this.router.navigate(['/user-register']);
