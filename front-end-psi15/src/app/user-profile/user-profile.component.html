@@ -1,4 +1,8 @@
-<div><h1>Profile</h1></div>
+<body>
+<header>
+    <h1>Profile</h1>
+    <button (click)="goToDashboard()">Go back</button>
+</header>
 <div>
     <p><strong>Profile Picture:</strong> Not profile picture selected</p>
     <p><strong>Username:</strong> {{user.username}}</p>
@@ -9,3 +13,4 @@
     <button (click)="showNotImplemented()">My Library</button>
     <button (click)="showNotImplemented()">My List</button>
 </div>
+</body>

@@ -46,16 +46,18 @@ export class UserService {
     );
   }
 
-  private isAlphanumeric(str: string): boolean {
-    return /^[a-z0-9]+$/i.test(str);
-  }
 
   setLoggedInUser(username: String){
     this.loggedInUser = username;
   }
 
+  displayItem(title: string){
+    this.router.navigate([`/itemDetail/${title}`]);
+  }
+
   getLoggedInUser(): String | null{
-    return this.loggedInUser;
+    const cookieArray = document.cookie.split(';');
+    return cookieArray[1];
   }
 
   isLoggedIn(): boolean {
@@ -91,6 +93,7 @@ export class UserService {
         (userPassword: string) => {
           if(userPassword === password) {
             window.alert('Succesfully logged in!');
+            document.cookie = username;
             this.setLoggedInUser(username);
             this.router.navigate(['/dashboard']);
           } else {

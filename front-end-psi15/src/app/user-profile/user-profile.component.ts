@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-profile',
@@ -15,7 +16,7 @@ export class UserProfileComponent implements OnInit{
     wallet: 0
   };
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
       this.getUser();
@@ -23,7 +24,7 @@ export class UserProfileComponent implements OnInit{
 
   getUser() {
     var username = <string>this.userService.getLoggedInUser();
-    console.log(username);
+    username = username.trim();
     var tempUser  = this.userService.getUserByUsername(username).subscribe(
       user => {
         this.user = user;
@@ -40,5 +41,8 @@ export class UserProfileComponent implements OnInit{
   showNotImplemented() {
     window.alert('Feature not implemented.');
   }
-  
+
+  goToDashboard(){
+    this.router.navigate(['/dashboard']);
+  }
 }

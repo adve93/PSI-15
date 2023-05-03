@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ItemServiceService } from '../item-service.service';
 
 @Component({
   selector: 'app-main-page',
@@ -8,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class MainPageComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private itemService: ItemServiceService) {}
+
+  ngOnInit(){
+    this.itemService.addTestItems();
+  }
 
   goToRegister(): void {
     this.router.navigate(['/user-register']);
