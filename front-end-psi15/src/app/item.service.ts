@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from './item';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +17,24 @@ export class ItemService {
     return this.http.post(`${this.backEnd}/item/create`, item);
   }
 
-  getItemList() {
-    return this.http.get(`${this.backEnd}/item/list`);
+  getItemList(): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.backEnd}/item/list`);
   }
 
   getItemByTitle(title: string): Observable<Item>{
     return this.http.get<Item>(`${this.backEnd}/item/${title}`);
   }
+
+
+  searchItem(term: string): Observable<Item[]>{
+
+    if(!term.trim()){
+      return of([]);
+    }
+
+    return this.http.get<Item[]>(`${this.backEnd}/item/?title=${term}`);
+
+  }
+
 
 }

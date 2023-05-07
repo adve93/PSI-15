@@ -19,6 +19,7 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 //Services
 import { ItemService } from './item.service';
 import { UserService } from './user.service';
+import { ItemSearchComponent } from './item-search/item-search.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserService } from './user.service';
     RegisterPageComponent,
     LoginPageComponent,
     DashboardComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ItemSearchComponent
   ],
   imports: [
     BrowserModule,
