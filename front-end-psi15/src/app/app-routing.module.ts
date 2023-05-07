@@ -18,8 +18,6 @@ const routes: Routes = [
   { path: 'user-details', component: UserProfileComponent},
   { path: 'item-detail/:title', component: ItemDetailComponent},
   { path: 'dashboard', component: DashboardComponent}
-  //{ path: 'itemDetail/:title', component: ItemDetailComponent}
-
 
 ];
 

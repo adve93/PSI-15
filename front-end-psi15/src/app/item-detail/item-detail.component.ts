@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../item';
-import { ItemServiceService } from '../item-service.service';
 
 @Component({
   selector: 'app-item-detail',
@@ -10,7 +9,7 @@ import { ItemServiceService } from '../item-service.service';
 })
 export class ItemDetailComponent {
 
-  constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemServiceService){}
+  constructor(private route: ActivatedRoute, private router: Router/*, private itemService: ItemServiceService*/){}
 
   title: string = "";
 
@@ -33,6 +32,7 @@ export class ItemDetailComponent {
   }
 
   getItem(title: string) {
+    /*
     title.trim();
     var tempUser  = this.itemService.getItemByTitle(title).subscribe(
       item => {
@@ -42,6 +42,7 @@ export class ItemDetailComponent {
         console.log(error);
       }
     )
+    */
   }
 
 

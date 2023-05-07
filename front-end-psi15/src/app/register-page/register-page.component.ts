@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 })
 export class RegisterPageComponent {
 
+
   constructor(private userService: UserService, private router: Router) { }
 
   addUser(username: string, password: string): void {
     this.userService.addUser(username, password);
   }
-
 }
