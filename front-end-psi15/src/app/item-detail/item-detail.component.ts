@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../item';
+import { ItemService } from '../item.service';
 
 @Component({
   selector: 'app-item-detail',
@@ -9,12 +10,11 @@ import { Item } from '../item';
 })
 export class ItemDetailComponent {
 
-  constructor(private route: ActivatedRoute, private router: Router/*, private itemService: ItemServiceService*/){}
+  constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemService){}
 
   title: string = "";
 
-
-  item: Item = {
+  tempItem: Item = {
     type: "",
     description: "",
     platform: "",
@@ -32,20 +32,23 @@ export class ItemDetailComponent {
   }
 
   getItem(title: string) {
-    /*
+    
     title.trim();
     var tempUser  = this.itemService.getItemByTitle(title).subscribe(
       item => {
-        this.item = item;
+        this.tempItem = item;
       },
       error => {
         console.log(error);
       }
     )
-    */
+    
+    if(!tempUser){
+      console.log("Item não existe!");
+    }
+
   }
-
-
+  
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }

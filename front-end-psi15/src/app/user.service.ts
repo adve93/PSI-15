@@ -75,7 +75,7 @@ export class UserService {
       username: username,
       password: password
     };
-    const response =  this.http.post(`${this.backEnd}/user/update/${username}`, user);
+    return this.http.post(`${this.backEnd}/user/update/${username}`, user);
   }
 
   userLogin(username: string, password: string){

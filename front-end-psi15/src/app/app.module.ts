@@ -7,7 +7,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 
 
-import { UserService } from './user.service';
+
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,6 +16,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemDetailComponent } from './item-detail/item-detail.component'; 
 
+//Services
+import { ItemService } from './item.service';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,7 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService],
+  providers: [UserService, ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
