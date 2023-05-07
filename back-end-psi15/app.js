@@ -15,7 +15,7 @@ app.use(cors());
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb+srv://Afonso:2Adleavid2002@cluster1.4rurvvj.mongodb.net/psi15?retryWrites=true&w=majority";
+const mongoDB = "mongodb://psi015:psi015@localhost:27017/psi015?retryWrites=true&authSource=psi015";
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -32,7 +32,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 //Routes
 app.use("/", indexRouter);
 app.use("/user", userRouter);

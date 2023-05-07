@@ -13,35 +13,12 @@ import { User } from '../user';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
-  constructor(private router: Router, private userService: UserService) { }
+
+  constructor( private userService: UserService) { }
   
   login(username: string, password: string) {
-    username = username.trim();
-    var user = this.userService.getUserByUsername(username) 
-    if(!user) {
-      console.log("user não existe!")
-    } else {
-      user.pipe(
-        map(user => user as User),
-        map(user => user.password)
-      )
-      .subscribe(
-        (userPassword: string) => {
-          if(userPassword === password) {
-            window.alert('passsword is correct!');
-            this.userService.setLoggedInUser(username);
-            this.goToDashboard();
-          } else {
-            window.alert('passsword is incorrect!');
-          }
-        },
-        error => console.log('Error', error)
-      )
-    }
-      
-  }
+    
+    this.userService.userLogin(username, password);
   
-  goToDashboard(): void {
-    this.router.navigate(['/dashboard']);
   }
 }

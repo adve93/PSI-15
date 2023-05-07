@@ -1,27 +1,17 @@
-<h1>VideoGame SHOP-GROUP15</h1>
-
-<div class="header">
-    <header>
-        <nav>
-            <div>
-                <h2>Take a look at our newest products here!</h2>
-            </div>
-            <div class= "links">
-                <a routerLink="/search-items">Pesquisar
-                    <span class="material-symbols-outlined">search</span>
-                </a>
-                <a routerLink="/checkout">Checkout
-                    <span class="material-symbols-outlined">shopping_cart_checkout</span></a>
-            </div>
-          </nav>
-    </header>
-</div>
-<div class="main">
-    <a *ngFor="let item of items">
-        <!--routerLink="/itemDetail/{{item.title}}"-->
-    <p>{{item.title}}</p>
-    </a>
-
-    
-</div>
-
+<body>
+	<header>
+		<h1>Dashboard</h1>
+		<button (click)="goToUserProfile()">Profile</button>
+	</header>
+	<nav>
+		<ul>
+			<li (click)="showNotImplemented()"><a>Lists</a></li>
+			<li (click)="showNotImplemented()"><a>Library of Games</a></li>
+			<li (click)="showNotImplemented()"><a>Followers</a></li>
+			<li (click)="showNotImplemented()"><a>Following</a></li>
+		</ul>
+	</nav>
+	<main>
+		
+	</main>
+</body>

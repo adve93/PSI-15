@@ -1,26 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 
-import { Item } from '../item';
-import { ItemService } from '../item.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
-
-  constructor(private itemService: ItemService){ }
-  
-  items!: Item[];
+export class DashboardComponent{
 
 
-  ngOnInit(): void {
-    this.getItemList();
-  }
-  getItemList(): void{
-    this.itemService.getItemList().subscribe(items => this.items = items);;
+  constructor(private router: Router){}
+
+  showNotImplemented(){
+    window.alert('Feature not implemented.');
   }
 
+  goToUserProfile(){
+    this.router.navigate(['/user-details']);
+  }
 }

@@ -1,5 +1,16 @@
-<div><h1>Login</h1></div>
+<body>
+<header>
+    <h1>Profile</h1>
+    <button (click)="goToDashboard()">Go back</button>
+</header>
 <div>
+    <p><strong>Profile Picture:</strong> Not profile picture selected</p>
     <p><strong>Username:</strong> {{user.username}}</p>
-    <p><strong>Wallet:</strong> {{user.wallet | currency: 'USD'}}</p>
+    <p><strong>Wallet:</strong> {{user.wallet}}</p>
 </div>
+
+<div>
+    <button (click)="showNotImplemented()">My Library</button>
+    <button (click)="showNotImplemented()">My List</button>
+</div>
+</body>

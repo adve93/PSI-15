@@ -15,18 +15,53 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 });
 
 // Post new User.
-exports.user_create_post = asyncHandler(async (req, res, next) => {
+exports.user_create_post = [
 
-  // Create Author object with escaped and trimmed data
+  body("username")
+  .trim()
+  .isLength({ min: 3})
+  .withMessage("Username must be at least 3 characters")
+  .isAlphanumeric()
+  .withMessage("Username must be alphanumeric characters")
+  .escape()
+  .withMessage("Username must be specified."),
+
+  body("password")
+  .trim()
+  .isLength({ min: 8})
+  .withMessage("Password must be at least 8 characters")
+  .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
+  .withMessage("Password must contain at least one uppercase letter, one lowercase letter, and one number"),
+
+  asyncHandler(async (req, res, next) => {
+
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+    
+    // Create Author object with escaped and trimmed data
     var user = new User(req.body);
-    await user.save()
-    .then(user => {
-      res.status(200).json("Added successfully!");
-    })
-    .catch(err => {
-      res.status(500).send('Failed to create new user');
-    });
-  });
+
+    if (!errors.isEmpty()) {
+
+      // There are errors.
+      const errorMessages = errors.array().map(error => error.msg);
+      return res.status(422).json({ errors: errorMessages });
+
+    } else {
+      // Data from form is valid.
+
+      // Save user.
+      await user.save()
+      .then(user => {
+        res.status(200).json("Added successfully!");
+      })
+      .catch(err => {
+        res.status(500).send('Failed to create new user');
+      });
+    }
+    
+  })
+  ];
 
 
 // Display detail page for a specific User. Returns a user or null if user does not exist.

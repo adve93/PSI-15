@@ -14,14 +14,7 @@ export class RegisterPageComponent {
   constructor(private userService: UserService, private router: Router) { }
 
   addUser(username: string, password: string): void {
-    const userAdded = this.userService.addUser(username, password);
-    userAdded.subscribe((user) => {
-      console.log(user);
-    });
-    window.alert("User created. Please login to acess the platform!");
+    this.userService.addUser(username, password);
   }
 
-  goToMainPage(): void {
-    this.router.navigate(['/main-page']);
-  }
 }

@@ -5,10 +5,10 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
-import { SearchItemsComponent } from './search-items/search-items.component';
-import { CheckoutComponent } from './checkout/checkout.component';
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ItemDetailComponent } from './item-detail/item-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main-page', pathMatch: 'full'},
@@ -16,9 +16,7 @@ const routes: Routes = [
   { path: 'user-register', component: RegisterPageComponent},
   { path: 'user-login', component: LoginPageComponent},
   { path: 'user-details', component: UserProfileComponent},
-  { path: 'search-items', component: SearchItemsComponent},
-  { path: 'checkout', component: CheckoutComponent},
-
+  { path: 'item-detail/:title', component: ItemDetailComponent},
   { path: 'dashboard', component: DashboardComponent}
   //{ path: 'itemDetail/:title', component: ItemDetailComponent}
 
