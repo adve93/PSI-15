@@ -106,3 +106,16 @@ exports.user_delete_get = asyncHandler(async (req, res, next) => {
   }
 
 });
+
+exports.user_cart_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    
+    const cartItems = user.cart;
+    res.status(200).send(cartItems);
+  }
+
+});
