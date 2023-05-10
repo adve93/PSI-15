@@ -77,12 +77,14 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
 // Update existing User. Saldo e lista de jogos não alterados nesta função pq vão ter funções especificas.
 exports.user_update_post = asyncHandler(async (req, res, next) => {
 
+  
   const userInstance = await User.findOne({ username: req.body.username}).exec();
   if(!userInstance) 
     return next(new Error('Could not find user.'))
   else {
     userInstance.username = req.body.username;
     userInstance.password = req.body.password;
+    userInstance.image = req.body.image;
     await userInstance.save()
     .then(userInstance => {
       res.json("Updated successfully!")
