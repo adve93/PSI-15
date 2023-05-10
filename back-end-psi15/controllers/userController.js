@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require("express-validator");
+const user = require("../models/user");
 
 
 // Display list of all User.
@@ -115,12 +116,17 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
   if(!userInstance) 
     return res.status(400).send('User not found');
   else {
+    const cartItem = req.body.item;
+    if(userInstance.cart.has(cartItem)) {
+      var copies = userInstance.cart.get(cartItem);
+      userInstance.cart.set(cartItem, copies + 1);
+      res.status(200).send('Item added to cart successfully');
+    } else {
+      userInstance.cart.set(cartItem, 1);
+      await userInstance.save().exec();
+      res.status(200).send('Item added to cart successfully');
+    }
     
-    cartItem = req.body.item;
-    userInstance.cart.push({type: cartItem});
-    await userInstance.save().exec();
-    res.status(200).send('Item added to cart successfully');
-
   }
 
 });
