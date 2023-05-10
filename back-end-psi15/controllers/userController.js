@@ -108,7 +108,7 @@ exports.user_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 //FUNÇÃO QUE ADICIONA ITEMS AO CARRINHO PARA O US11
-//VAI RECEBER USERNAME DO LOG IN USER E JOGO PARA ADICIONAR AO CARRINHO
+//VAI RECEBER USERNAME DO LOGGED IN USER E O ITEM PARA ADICIONAR AO CARRINHO
 exports.user_addCart_post = asyncHandler(async (req, res, next) => { 
 
   const userInstance = await User.findOne({ username: req.body.username}).exec();
@@ -122,5 +122,5 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
     res.status(200).send('Item added to cart successfully');
 
   }
-  
+
 });
