@@ -17,4 +17,6 @@ router.get("/:username", user_controller.user_detail);
 
 router.get("/delete/:username", user_controller.user_delete_get);
 
+router.post("/addItem/:username", user_controller.user_addCart_post);
+
 module.exports = router;
