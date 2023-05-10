@@ -18,7 +18,8 @@ export class UserService {
   addUser(username: string, password: string) {
     const user = {
       username: username,
-      password: password
+      password: password,
+      pfpPic: '../assets/pic1.jpg'
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -70,12 +71,8 @@ export class UserService {
     return this.http.get<User>(`${this.backEnd}/user/${username}`);
   }
 
-  postUpdateUser(username: string, password: string) {
-    const user = {
-      username: username,
-      password: password
-    };
-    return this.http.post(`${this.backEnd}/user/update/${username}`, user);
+  postUpdateUser(user: User) {
+    return this.http.post(`${this.backEnd}/user/update/${user.username}`, user);
   }
 
   userLogin(username: string, password: string){
@@ -103,9 +100,7 @@ export class UserService {
     }
   }
 
-
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
   }
-
 }
