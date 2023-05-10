@@ -118,7 +118,7 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
     
     cartItem = req.body.item;
     userInstance.cart.push({type: cartItem});
-    await user.save().exec();
+    await userInstance.save().exec();
     res.status(200).send('Item added to cart successfully');
 
   }
