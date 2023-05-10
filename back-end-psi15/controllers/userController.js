@@ -133,8 +133,8 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
       return res.status(404).send('Item not found in cart');
     }
 
-    user.cart.splice(itemIndex, 1);
-    await user.save();
+    userInstance.cart.splice(itemIndex, 1);
+    await userInstance.save();
 
     res.status(200).send('Item removed from cart successfully');
   }
