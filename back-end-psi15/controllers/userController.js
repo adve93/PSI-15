@@ -114,7 +114,7 @@ exports.user_cart_get = asyncHandler(async (req, res, next) => {
     return res.status(400).send("User does not exist!")
   else {
     
-    const cartItems = user.cart;
+    const cartItems = userInstance.cart;
     res.status(200).send(cartItems);
   }
 
