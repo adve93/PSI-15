@@ -30,7 +30,7 @@ exports.item_create_post = asyncHandler(async (req, res, next) => {
 // Display detail page for a specific Item. Returns a item or null if item does not exist.
 exports.item_detail = asyncHandler(async (req, res, next) => {
     try {
-      const itemInstance = await Item.findOne({ title: req.params.tile}).exec();
+      const itemInstance = await Item.findOne({ title: req.params.title}).exec();
       res.json(itemInstance);
     } catch(error) {
       console.error(error);
@@ -51,6 +51,8 @@ exports.item_update_post = asyncHandler(async (req, res, next) => {
     itemInstance.languages = req.body.languages;
     itemInstance.price = req.body.price;
     itemInstance.classification = req.body.classification;
+    itemInstance.image = req.body.image;
+    itemInstance.optional_links = req.body.optional_links;
     await itemInstance.save()
     .then(itemInstance => {
       res.json("Updated successfully!")

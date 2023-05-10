@@ -10,6 +10,8 @@ const ItemSchema = new Schema({
   price: {type: Number , requeired: true},
   classification: {type: Number},
   title: {type: String, require: true, unique: true},
+  image: {type: String, require: true},
+  optional_links: [{ type: String}],
 });
 
 
