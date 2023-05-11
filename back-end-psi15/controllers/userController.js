@@ -77,12 +77,14 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
 // Update existing User. Saldo e lista de jogos não alterados nesta função pq vão ter funções especificas.
 exports.user_update_post = asyncHandler(async (req, res, next) => {
 
+  
   const userInstance = await User.findOne({ username: req.body.username}).exec();
   if(!userInstance) 
     return next(new Error('Could not find user.'))
   else {
     userInstance.username = req.body.username;
     userInstance.password = req.body.password;
+    userInstance.image = req.body.image;
     await userInstance.save()
     .then(userInstance => {
       res.json("Updated successfully!")
@@ -101,6 +103,39 @@ exports.user_delete_get = asyncHandler(async (req, res, next) => {
     return next(new Error('Could not find user.'))
   else {
     res.json("Deleted successfully!")
+  }
+
+});
+
+exports.user_cart_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    
+    const cartItems = userInstance.cart;
+    res.status(200).send(cartItems);
+  }
+
+});
+
+exports.user_cart_delete = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    
+    const cartItem = req.body.item;
+    if(userInstance.cart.has(cartItem)) {
+      var copies = userInstance.cart.get(cartItem);
+      userInstance.cart.set(cartItem, copies - 1);
+      await userInstance.save().exec();
+      res.status(200).send('Item removed successfully');
+    } else {
+      return res.status(400).send("Item does not exist!")
+    }
   }
 
 });
