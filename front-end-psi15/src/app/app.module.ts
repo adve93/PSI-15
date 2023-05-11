@@ -20,6 +20,7 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ItemService } from './item.service';
 import { UserService } from './user.service';
 import { ItemSearchComponent } from './item-search/item-search.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ItemSearchComponent } from './item-search/item-search.component';
     LoginPageComponent,
     DashboardComponent,
     UserProfileComponent,
-    ItemSearchComponent
+    ItemSearchComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
