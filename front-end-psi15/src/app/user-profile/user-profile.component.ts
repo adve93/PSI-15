@@ -45,4 +45,8 @@ export class UserProfileComponent implements OnInit{
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }
+  redirectUserUpdate() {
+    this.router.navigate(['/user-update']);
+  }
+  
 }

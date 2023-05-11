@@ -21,6 +21,7 @@ import { ItemService } from './item.service';
 import { UserService } from './user.service';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     DashboardComponent,
     UserProfileComponent,
     ItemSearchComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    UserUpdateComponent
   ],
   imports: [
     BrowserModule,
