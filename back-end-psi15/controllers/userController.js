@@ -139,3 +139,16 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
   }
 
 });
+
+exports.user_getGames_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    
+    const games = userInstance.games;
+    res.status(200).send(games);
+  }
+
+});

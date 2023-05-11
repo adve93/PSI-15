@@ -21,4 +21,6 @@ router.get("/cart/:username", user_controller.user_cart_get);
 
 router.delete("/:username/cart", user_controller.user_cart_delete);
 
+router.get("/item/:username", user_controller.user_getGames_get); 
+
 module.exports = router;
