@@ -5,5 +5,5 @@ export interface User{
     password: string;
     pfpPic: string;
     wallet: number;
-    cart: Map<Item, number>;
+    cart: Map<Item, Number>;
 }
