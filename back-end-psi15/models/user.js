@@ -7,7 +7,15 @@ const UserSchema = new Schema({
   password: { type: String, required: true, minLength: 8},
   wallet: {type: String, default:"200"},
   games: [{ type: Schema.Types.ObjectId, ref: "Item"}],
-  cart: [{ type: Schema.Types.ObjectId, ref: "Item"}],
+  cart: {
+    type: Map,
+    of: Number,
+    key: {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+      required: true
+    }
+  },
   image: {type: String, required: true},
 });
 
