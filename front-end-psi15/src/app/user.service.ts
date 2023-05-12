@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angul
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { User } from './user';
 import { Router } from '@angular/router';
+import { Item } from './item';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +65,7 @@ export class UserService {
   }
 
   getUserList() {
-    return this.http.get(`${this.backEnd}/user/list`);
+    return this.http.get<User[]>(`${this.backEnd}/user/list`);
   }
 
   getUserByUsername(username: string): Observable<User> {
@@ -98,6 +99,20 @@ export class UserService {
         error => console.log('Error', error)
       )
     }
+  }
+
+  addItemToCart(item: Item, username: string){
+    return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
+  }
+
+  getNumberOfItemsIncCart(item: Item, username: string): Number{
+    var value: any;
+    this.http.get<Map<Item,Number>>(`${this.backEnd}/user/getCart/${username}`).subscribe(
+      (response: Map<Item,Number>) => {
+        value = response.get(item);
+      }
+    );
+    return value;
   }
 
   deleteUserByUsername(username: string) {
