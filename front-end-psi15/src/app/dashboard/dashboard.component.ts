@@ -28,4 +28,8 @@ export class DashboardComponent{
   goToUserProfile(): void{
     this.router.navigate(['/user-details']);
   }
+
+  /**goToCart(): void{
+    this.router.navigate(['/cart']);
+  }*/
 }
