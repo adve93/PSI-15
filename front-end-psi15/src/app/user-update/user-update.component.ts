@@ -25,7 +25,10 @@ export class UserUpdateComponent {
     this.router.navigate(['/user-profile']);
   }
   updateUser(newUsername: string, newImg: string){
-    
+    if (newUsername)
+    this.tempuser.username = newUsername
+    if(newImg)
+    this.tempuser.username = newImg
     this.userService.postUpdateUser(this.tempuser, this.oldUsername);
   }
 }
