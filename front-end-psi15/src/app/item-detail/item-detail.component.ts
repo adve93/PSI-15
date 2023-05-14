@@ -21,7 +21,9 @@ export class ItemDetailComponent {
     languages: [],
     price: 0,
     classification: 0,
-    title: ""
+    title: "",
+    image: "ola",
+    optional_links: []
   }
 
   ngOnInit(): void {

@@ -7,7 +7,7 @@ const user = require("../models/user");
 // Display list of all User.
 exports.user_list = asyncHandler(async (req, res, next) => {
     try {
-      const allUsers = await User.find({}, "username").exec();
+      const allUsers = await User.find({}, ["username", "image", "wallet", "games", "cart"]).exec();
       res.send(allUsers);
     } catch(error) {
       console.error(error);
@@ -64,6 +64,47 @@ exports.user_create_post = [
   })
   ];
 
+// Update existing User. Saldo e lista de jogos não alterados nesta função pq vão ter funções especificas.
+exports.user_update_post = [
+  
+  body("username")
+  .trim()
+  .isLength({ min: 3})
+  .withMessage("Username must be at least 3 characters")
+  .isAlphanumeric()
+  .withMessage("Username must be alphanumeric characters")
+  .escape()
+  .withMessage("Username must be specified."),
+  
+  asyncHandler(async (req, res, next) => {
+
+  // Extract the validation errors from a request.
+  const errors = validationResult(req);
+    
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+
+    if (!errors.isEmpty()) {
+      // There are errors.
+      const errorMessages = errors.array().map(error => error.msg);
+      return res.status(422).json({ errors: errorMessages });
+    } else {
+      userInstance.username = req.body.username;
+      userInstance.image = req.body.image;
+      await userInstance.save()
+      .then(userInstance => {
+        res.json("Updated successfully!")
+      })
+      .catch(err => {
+        res.send("Error")
+      });
+    }
+  }
+})
+];
+
 
 // Display detail page for a specific User. Returns a user or null if user does not exist.
 exports.user_detail = asyncHandler(async (req, res, next) => {
@@ -73,27 +114,6 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
     } catch(error) {
       console.error(error);
     }
-});
-
-// Update existing User. Saldo e lista de jogos não alterados nesta função pq vão ter funções especificas.
-exports.user_update_post = asyncHandler(async (req, res, next) => {
-
-  
-  const userInstance = await User.findOne({ username: req.body.username}).exec();
-  if(!userInstance) 
-    return next(new Error('Could not find user.'))
-  else {
-    userInstance.username = req.body.username;
-    userInstance.password = req.body.password;
-    userInstance.image = req.body.image;
-    await userInstance.save()
-    .then(userInstance => {
-      res.json("Updated successfully!")
-    })
-    .catch(err => {
-      res.send("Error")
-    });
-  }
 });
 
 // Deleted existing user. Returns a error if no user found.
@@ -138,6 +158,9 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
     await userInstance.save();
 
     res.status(200).send('Item removed from cart successfully');
+  }
+  
+});
 
 exports.user_addCart_post = asyncHandler(async (req, res, next) => { 
 
