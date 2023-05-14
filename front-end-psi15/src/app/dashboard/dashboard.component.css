@@ -80,3 +80,24 @@ main {
   'GRAD' 0,
   'opsz' 48
 }
+header .direita{
+  display: flex;
+  justify-content: space-between;
+}
+
+header .cart{
+  position: relative;
+  text-align: right;
+}
+
+header .quantity{
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -5px;
+  left: 63%;
+  padding: 3px 10px;
+}
