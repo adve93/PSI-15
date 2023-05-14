@@ -49,17 +49,13 @@ export class UserService {
     );
   }
 
-  setLoggedInUser(username: String){
-    this.loggedInUser = username;
-  }
-
   displayItem(title: string){
     this.router.navigate([`/itemDetail/${title}`]);
   }
 
-  getLoggedInUser(): String | null{
+  getLoggedInUser(): string{
     const cookieArray = document.cookie.split(';');
-    return cookieArray[1];
+    return cookieArray[1].toString();
   }
 
   isLoggedIn(): boolean {
@@ -92,7 +88,6 @@ export class UserService {
           if(userPassword === password) {
             window.alert('Succesfully logged in!');
             document.cookie = username;
-            this.setLoggedInUser(username);
             this.router.navigate(['/dashboard']);
           } else {
             window.alert('Password incorrect!');

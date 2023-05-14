@@ -10,10 +10,22 @@ import { Router } from '@angular/router';
 export class UserUpdateComponent {
   
   constructor( private userService: UserService,private router: Router) { }
+
+  oldUsername: string = "";
+  tempuser!: User;
+
+  NgOnInit(){
+    this.oldUsername = this.userService.getLoggedInUser();
+    this.userService.getUserByUsername(this.oldUsername).subscribe((user: User) =>{
+      this.tempuser = user;
+    });
+  }
+
   returnToProfile(){
     this.router.navigate(['/user-profile']);
   }
-  updateUser(username: String, imagePath:String){
-    this.userService.postUpdateUser(username, imagePath);
+  updateUser(newUsername: string, newImg: string){
+    
+    this.userService.postUpdateUser(this.tempuser, this.oldUsername);
   }
 }
