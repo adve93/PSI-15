@@ -19,9 +19,7 @@ export class DashboardComponent{
 
   /*
   ngOnInit() {
-    this.userService.getUserList().subscribe(users => {
-     console.log(users);
-    });
+    this.userService.deleteUserByUsername("CCCC").subscribe();
   }*/
 
   showNotImplemented(){

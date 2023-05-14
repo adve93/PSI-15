@@ -9,13 +9,13 @@ router.post("/create", user_controller.user_create_post);
 
 router.post("/update/:username", user_controller.user_update_post);
 
-router.get("/:username", user_controller.user_detail);
+router.get("/detail/:username", user_controller.user_detail);
 
 router.get("/delete/:username", user_controller.user_delete_get);
 
 router.get("/cart/:username", user_controller.user_cart_get);
 
-router.delete("/:username/cart/:title", user_controller.user_cart_delete);
+router.delete("/cart/:username/:title", user_controller.user_cart_delete);
 
 router.post("/addItem/:username", user_controller.user_addCart_post);
 

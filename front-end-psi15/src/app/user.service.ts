@@ -71,7 +71,7 @@ export class UserService {
   }
 
   getUserByUsername(username: string): Observable<User> {
-    return this.http.get<User>(`${this.backEnd}/user/${username}`);
+    return this.http.get<User>(`${this.backEnd}/user/detail/${username}`);
   }
 
   postUpdateUser(user: User) {
