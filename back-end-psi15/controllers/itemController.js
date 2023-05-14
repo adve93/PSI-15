@@ -6,7 +6,7 @@ const { body, validationResult } = require("express-validator");
 // Display list of all item.
 exports.item_list = asyncHandler(async (req, res, next) => {
     try {
-      const allItems = await Item.find({}, "title").exec();
+      const allItems = await Item.find().exec();
       res.send(allItems);
     } catch(error) {
       console.error(error);
@@ -35,32 +35,6 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
     } catch(error) {
       console.error(error);
     }
-});
-
-// Update existing item.
-exports.item_update_post = asyncHandler(async (req, res, next) => {
-
-  const itemInstance = await Item.findOne({ title: req.body.title}).exec();
-  if(!itemInstance) 
-    return next(new Error('Could not find user.'))
-  else {
-    itemInstance.title = req.body.title;
-    itemInstance.type = req.body.type;
-    itemInstance.description = req.body.description;
-    itemInstance.platform = req.body.platform;
-    itemInstance.languages = req.body.languages;
-    itemInstance.price = req.body.price;
-    itemInstance.classification = req.body.classification;
-    itemInstance.image = req.body.image;
-    itemInstance.optional_links = req.body.optional_links;
-    await itemInstance.save()
-    .then(itemInstance => {
-      res.json("Updated successfully!")
-    })
-    .catch(err => {
-      res.send("Error")
-    });
-  }
 });
 
 // Deleted existing item. Returns a error if no item found.
