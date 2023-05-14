@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angul
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { User } from './user';
 import { Router } from '@angular/router';
+import { Item } from './item';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class UserService {
     const user = {
       username: username,
       password: password,
-      pfpPic: '../assets/pic1.jpg'
+      image: '../assets/pic1.jpg'
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -29,7 +30,9 @@ export class UserService {
           window.alert(errorMessages);
         }
         if (error.status === 500) {
-          window.alert('Username already taken.');
+          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
+          const errorMessages = errors[0].join(', ');
+          window.alert(errorMessages);
         }
         return throwError(error.message);
       })
@@ -64,21 +67,21 @@ export class UserService {
   }
 
   getUserList() {
-    return this.http.get(`${this.backEnd}/user/list`);
+    return this.http.get<User[]>(`${this.backEnd}/user/`);
   }
 
   getUserByUsername(username: string): Observable<User> {
-    return this.http.get<User>(`${this.backEnd}/user/${username}`);
+    return this.http.get<User>(`${this.backEnd}/user/detail/${username}`);
   }
 
-  postUpdateUser(user: User) {
-    return this.http.post(`${this.backEnd}/user/update/${user.username}`, user);
+  postUpdateUser(user: User, oldUsername: string) {
+    return this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user);
   }
 
   userLogin(username: string, password: string){
     var user = this.getUserByUsername(username);
     if(!user) {
-      console.log("user não existe!")
+      window.alert("User não existe!");
     } else {
       user.pipe(
         map(user => user as User),
@@ -98,6 +101,20 @@ export class UserService {
         error => console.log('Error', error)
       )
     }
+  }
+
+  addItemToCart(item: Item, username: string){
+    return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
+  }
+
+  getNumberOfItemsIncCart(item: Item, username: string): Number{
+    var value: any;
+    this.http.get<Map<Item,Number>>(`${this.backEnd}/user/getCart/${username}`).subscribe(
+      (response: Map<Item,Number>) => {
+        value = response.get(item);
+      }
+    );
+    return value;
   }
 
   deleteUserByUsername(username: string) {

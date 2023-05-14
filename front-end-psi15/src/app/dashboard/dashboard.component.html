@@ -1,7 +1,15 @@
 <body>
 	<header>
 		<h1>Dashboard</h1>
-		<button (click)="goToUserProfile()">Profile</button>
+		<div class="direita">
+			<button (click)="goToUserProfile()">Profile</button>
+			<div class="cart">
+				<button class="material-symbols-outlined">
+					shopping_cart
+				</button>
+				<span class="quantity">0</span>
+			</div>
+		</div>
 	</header>
 	<nav>
 		<ul>
@@ -9,6 +17,7 @@
 			<li (click)="showNotImplemented()"><a>Library of Games</a></li>
 			<li (click)="showNotImplemented()"><a>Followers</a></li>
 			<li (click)="showNotImplemented()"><a>Following</a></li>
+
 		</ul>
 	</nav>
 	<div class="items-menu">
