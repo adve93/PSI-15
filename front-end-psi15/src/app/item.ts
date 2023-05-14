@@ -6,4 +6,6 @@ export interface Item{
   price: number;
   classification: number;
   title: string;
+  image: string;
+  optional_links: string[]; 
 }

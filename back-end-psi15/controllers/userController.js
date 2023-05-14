@@ -138,6 +138,9 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
     await userInstance.save();
 
     res.status(200).send('Item removed from cart successfully');
+  }
+  
+});
 
 exports.user_addCart_post = asyncHandler(async (req, res, next) => { 
 
