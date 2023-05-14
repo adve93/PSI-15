@@ -18,13 +18,16 @@ export class ItemService {
   }
 
   getItemList(): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.backEnd}/item/list`);
+    return this.http.get<Item[]>(`${this.backEnd}/item/`);
   }
 
   getItemByTitle(title: string): Observable<Item>{
-    return this.http.get<Item>(`${this.backEnd}/item/${title}`);
+    return this.http.get<Item>(`${this.backEnd}/item/detail/${title}`);
   }
 
+  deleteItemByTitle(title: string) {
+    return this.http.get(`${this.backEnd}/item/delete/${title}`);
+  }
 
   searchItem(term: string): Observable<Item[]>{
 
