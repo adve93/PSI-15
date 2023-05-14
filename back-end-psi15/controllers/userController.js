@@ -154,10 +154,12 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
       userInstance.cart.set(cartItem, copies - 1);
       await userInstance.save().exec();
       res.status(200).send('Item removed successfully');
+
     } else {
       return res.status(400).send("Item does not exist!")
     }
   }
+
 
 });
 
@@ -171,7 +173,6 @@ exports.user_getGames_get = asyncHandler(async (req, res, next) => {
     const games = userInstance.games;
     res.status(200).send(games);
   }
-  
 });
 
 exports.user_addCart_post = asyncHandler(async (req, res, next) => { 
@@ -190,6 +191,7 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
       await userInstance.save().exec();
       res.status(200).send('Item added to cart successfully');
     }
+
   }
 
 });
