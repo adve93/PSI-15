@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angul
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { User } from './user';
 import { Router } from '@angular/router';
+import { Item } from './item';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class UserService {
   addUser(username: string, password: string) {
     const user = {
       username: username,
-      password: password
+      password: password,
+      pfpPic: '../assets/pic1.jpg'
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -63,19 +65,15 @@ export class UserService {
   }
 
   getUserList() {
-    return this.http.get(`${this.backEnd}/user/list`);
+    return this.http.get<User[]>(`${this.backEnd}/user/list`);
   }
 
   getUserByUsername(username: string): Observable<User> {
     return this.http.get<User>(`${this.backEnd}/user/${username}`);
   }
 
-  postUpdateUser(username: string, password: string) {
-    const user = {
-      username: username,
-      password: password
-    };
-    return this.http.post(`${this.backEnd}/user/update/${username}`, user);
+  postUpdateUser(user: User) {
+    return this.http.post(`${this.backEnd}/user/update/${user.username}`, user);
   }
 
   userLogin(username: string, password: string){
@@ -103,9 +101,17 @@ export class UserService {
     }
   }
 
+  addItemToCart(item: Item){
+    return this.http.post(`${this.backEnd}/user/addItem/:username`, item);
+  }
+
+  getNumberOfItemsIncCart(item: Item){
+
+    //Discutir implementação
+    //return this.http.get<Number>(`${this.backEnd}/user/getItemNumber/:username`, item);
+  }
 
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
   }
-
 }
