@@ -2,7 +2,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from '../item';
+import { User } from '../user';
 import { ItemService } from '../item.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,8 +14,15 @@ import { ItemService } from '../item.service';
 export class DashboardComponent{
 
   items: Item[] = [];
+  
+  constructor(private router: Router, private itemService: ItemService, private userService: UserService){}
 
-  constructor(private router: Router, private itemService: ItemService){}
+  /*
+  ngOnInit() {
+    this.userService.getUserList().subscribe(users => {
+     console.log(users);
+    });
+  }*/
 
   showNotImplemented(){
     window.alert('Feature not implemented.');

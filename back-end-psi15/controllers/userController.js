@@ -7,7 +7,7 @@ const user = require("../models/user");
 // Display list of all User.
 exports.user_list = asyncHandler(async (req, res, next) => {
     try {
-      const allUsers = await User.find({}, "username").exec();
+      const allUsers = await User.find().exec();
       res.send(allUsers);
     } catch(error) {
       console.error(error);

@@ -20,7 +20,7 @@ export class UserService {
     const user = {
       username: username,
       password: password,
-      pfpPic: '../assets/pic1.jpg'
+      image: '../assets/pic1.jpg'
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -30,7 +30,9 @@ export class UserService {
           window.alert(errorMessages);
         }
         if (error.status === 500) {
-          window.alert('Username already taken.');
+          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
+          const errorMessages = errors[0].join(', ');
+          window.alert(errorMessages);
         }
         return throwError(error.message);
       })
@@ -65,7 +67,7 @@ export class UserService {
   }
 
   getUserList() {
-    return this.http.get<User[]>(`${this.backEnd}/user/list`);
+    return this.http.get<User[]>(`${this.backEnd}/user/`);
   }
 
   getUserByUsername(username: string): Observable<User> {
@@ -79,7 +81,7 @@ export class UserService {
   userLogin(username: string, password: string){
     var user = this.getUserByUsername(username);
     if(!user) {
-      console.log("user não existe!")
+      window.alert("User não existe!");
     } else {
       user.pipe(
         map(user => user as User),
