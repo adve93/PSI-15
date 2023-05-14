@@ -14,21 +14,8 @@ import { UserService } from '../user.service';
 export class DashboardComponent{
 
   items: Item[] = [];
-  user: User = {
-    username: "Afonso",
-    password: "Aa123456789",
-    wallet: 200,
-    games: new Map<Item, Date>(),
-    cart: new Map<Item, number>(),
-    image: "ola"
-  };
 
   constructor(private router: Router, private itemService: ItemService, private userService: UserService){}
-
-  
-  ngOnInit() {
-    this.userService.postUpdateUser(this.user, "fds").subscribe();
-  }
 
   showNotImplemented(){
     window.alert('Feature not implemented.');
