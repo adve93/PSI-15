@@ -74,8 +74,8 @@ export class UserService {
     return this.http.get<User>(`${this.backEnd}/user/detail/${username}`);
   }
 
-  postUpdateUser(user: User) {
-    return this.http.post(`${this.backEnd}/user/update/${user.username}`, user);
+  postUpdateUser(user: User, oldUsername: string) {
+    return this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user);
   }
 
   userLogin(username: string, password: string){
