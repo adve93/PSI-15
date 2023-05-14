@@ -2,7 +2,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from '../item';
+import { User } from '../user';
 import { ItemService } from '../item.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,7 @@ export class DashboardComponent{
 
   items: Item[] = [];
 
-  constructor(private router: Router, private itemService: ItemService){}
+  constructor(private router: Router, private itemService: ItemService, private userService: UserService){}
 
   showNotImplemented(){
     window.alert('Feature not implemented.');

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { Item } from '../item';
 
 @Component({
   selector: 'user-profile',
@@ -13,7 +14,10 @@ export class UserProfileComponent implements OnInit{
   user: User = {
     username: "",
     password: "",
-    wallet: 0
+    wallet: 0,
+    games: new Map<Item, Date>(),
+    cart: new Map<Item, number>(),
+    image: "ola"
   };
 
   constructor(private userService: UserService, private router: Router) { }
