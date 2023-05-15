@@ -17,11 +17,11 @@ export class DashboardComponent{
 
   constructor(private router: Router, private itemService: ItemService, private userService: UserService){}
 
-  /*
+  
   ngOnInit() {
-    this.itemService.getItemByTitle("Zelda").subscribe(item =>
-      this.userService.addItemToCart("Afonso", item).subscribe(result => console.log(result)))
-  }*/
+    this.userService.getUserGames("Afonso").subscribe(item =>
+      console.log(item))
+  }
 
   showNotImplemented(){
     window.alert('Feature not implemented.');

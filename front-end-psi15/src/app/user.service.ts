@@ -113,6 +113,10 @@ export class UserService {
     return this.http.get(`${this.backEnd}/user/cart/${username}`);
   }
 
+  getUserGames(username: string) {
+    return this.http.get(`${this.backEnd}/user/games/${username}`);
+  }
+
   deleteItemUserCart(username: string, item: Item) {
     return this.http.post(`${this.backEnd}/user/deleteItem/${username}`, item);
   }
@@ -125,6 +129,10 @@ export class UserService {
       }
     );
     return value;
+  }
+
+  postUserCheckout(username: string) {
+    return this.http.post(`${this.backEnd}/user/checkout/${username}`, username);
   }
 
   deleteUserByUsername(username: string) {
