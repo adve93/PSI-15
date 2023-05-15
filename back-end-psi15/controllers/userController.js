@@ -190,18 +190,55 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
     return res.status(400).send('User not found');
   else {
     const itemInstance = await Item.findOne({ title: req.body.title}).exec();
-    const itemTitle = itemInstance.title;
-    if(userInstance.cart.has(itemTitle)) {
-      var copies = userInstance.cart.get(itemTitle);
-      userInstance.cart.set(itemTitle,(copies + 1));
-      await userInstance.save();
-      return res.status(200).send('Item added to cart successfully');
-    } else {
-      userInstance.cart.set(itemTitle, 1);
-      await userInstance.save();
-      return res.status(200).send('Item added to cart successfully');
+    if(!itemInstance)
+      return res.status(400).send("Item does not exist!")
+    else {
+      const itemTitle = itemInstance.title;
+      if(userInstance.cart.has(itemTitle)) {
+        var copies = userInstance.cart.get(itemTitle);
+        userInstance.cart.set(itemTitle,(copies + 1));
+        await userInstance.save();
+        return res.status(200).send('Item added to cart successfully');
+      } else {
+        userInstance.cart.set(itemTitle, 1);
+        await userInstance.save();
+        return res.status(200).send('Item added to cart successfully');
+      }
     }
+  }
 
+});
+
+exports.user_checkout_post = asyncHandler(async (req, res, next) => { 
+  var randomNumber = Math.random();
+  if (randomNumber < 0.5) {
+    return res.status(400).send('Checkout chance failed!');
+  } else {
+    const userInstance = await User.findOne({ username: req.params.username}).exec();
+    if(!userInstance) 
+      return res.status(400).send('User not found');
+    else {
+      userInstance.cart.forEach((value, key) => {
+        for(i = 0; i < value; i++) {
+          userInstance.games.set(key + ": Copy_" + (i+1), new Date());
+        }
+      })
+      userInstance.cart.clear();
+      await userInstance.save();
+      res.status(200).send('Checkout successfull');
+    }
+  }
+
+});
+
+exports.user_clearGames_post = asyncHandler(async (req, res, next) => { 
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send('User not found');
+  else {
+    userInstance.games.clear();
+    await userInstance.save();
+    res.status(200).send('Games map cleared!');
   }
 
 });
