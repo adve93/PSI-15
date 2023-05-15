@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-item-detail',
@@ -10,7 +11,7 @@ import { ItemService } from '../item.service';
 })
 export class ItemDetailComponent {
 
-  constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemService){}
+  constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemService, private userService: UserService){}
 
   title: string = "";
 
@@ -54,4 +55,10 @@ export class ItemDetailComponent {
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }
+
+  itemToCard(){
+      const username = this.userService.getLoggedInUser(); 
+    this.itemService.getItemByTitle(this.title).subscribe
+    (item=> this.userService.addItemToCart(item,username).subscribe())
+}
 }
