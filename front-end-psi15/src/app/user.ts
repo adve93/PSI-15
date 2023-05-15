@@ -4,8 +4,8 @@ export interface User{
     username: string;
     password: string;
     wallet: number;
-    games: Map<Item, Date>;
-    cart: Map<Item, number>;
+    games: Map<String, Date>;
+    cart: Map<String, number>;
     image: string;
 
 }

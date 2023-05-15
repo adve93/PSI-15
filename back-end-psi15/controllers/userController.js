@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Item = require("../models/item");
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require("express-validator");
 const user = require("../models/user");
@@ -147,37 +148,60 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
   if(!userInstance) 
     return res.status(400).send("User does not exist!")
   else {
-    
-    const itemTitle = req.params.title;
-    const itemIndex = user.cart.findIndex(item => item.type === itemTitle);
-    if (itemIndex === -1) {
-      return res.status(404).send('Item not found in cart');
-    }
-
-    userInstance.cart.splice(itemIndex, 1);
-    await userInstance.save();
-
-    res.status(200).send('Item removed from cart successfully');
+    const itemInstance = await Item.findOne({ title: req.body.title}).exec();  
+    if(!itemInstance)
+      return res.status(400).send("Item does not exist!")
+    else {
+      const itemTitle = itemInstance.title;
+      if(userInstance.cart.has(itemTitle)) {
+        var copies = userInstance.cart.get(itemTitle);
+        userInstance.cart.set(itemTitle, copies - 1);
+        copies = userInstance.cart.get(itemTitle);
+        if(copies <= 0) {
+          userInstance.cart.delete(itemTitle);
+        }
+        await userInstance.save();
+        res.status(200).send('Item removed successfully');
+      } else {
+        return res.status(400).send("Item does not exist in the cart!")
+      }
+   }
   }
-  
+
+
+});
+
+exports.user_getGames_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    
+    const games = userInstance.games;
+    res.status(200).send(games);
+  }
 });
 
 exports.user_addCart_post = asyncHandler(async (req, res, next) => { 
 
-  const userInstance = await User.findOne({ username: req.body.username}).exec();
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
   if(!userInstance) 
     return res.status(400).send('User not found');
   else {
-    const cartItem = req.body.item;
-    if(userInstance.cart.has(cartItem)) {
-      var copies = userInstance.cart.get(cartItem);
-      userInstance.cart.set(cartItem, copies + 1);
-      res.status(200).send('Item added to cart successfully');
+    const itemInstance = await Item.findOne({ title: req.body.title}).exec();
+    const itemTitle = itemInstance.title;
+    if(userInstance.cart.has(itemTitle)) {
+      var copies = userInstance.cart.get(itemTitle);
+      userInstance.cart.set(itemTitle,(copies + 1));
+      await userInstance.save();
+      return res.status(200).send('Item added to cart successfully');
     } else {
-      userInstance.cart.set(cartItem, 1);
-      await userInstance.save().exec();
-      res.status(200).send('Item added to cart successfully');
+      userInstance.cart.set(itemTitle, 1);
+      await userInstance.save();
+      return res.status(200).send('Item added to cart successfully');
     }
+
   }
 
 });
