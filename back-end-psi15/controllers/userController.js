@@ -148,17 +148,20 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
   if(!userInstance) 
     return res.status(400).send("User does not exist!")
   else {
-    
-    const cartItem = req.body.item;
-    if(userInstance.cart.has(cartItem)) {
-      var copies = userInstance.cart.get(cartItem);
-      userInstance.cart.set(cartItem, copies - 1);
-      await userInstance.save().exec();
-      res.status(200).send('Item removed successfully');
-
-    } else {
+    const itemInstance = await Item.findOne({ title: req.body.title}).exec();  
+    if(!itemInstance)
       return res.status(400).send("Item does not exist!")
-    }
+    else {
+      const itemTitle = itemInstance.title;
+      if(userInstance.cart.has(itemTitle)) {
+        var copies = userInstance.cart.get(itemTitle);
+        userInstance.cart.set(itemTitle, copies - 1);
+        await userInstance.save();
+        res.status(200).send('Item removed successfully');
+      } else {
+        return res.status(400).send("Item does not exist in the cart!")
+      }
+   }
   }
 
 

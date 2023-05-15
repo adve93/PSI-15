@@ -19,8 +19,8 @@ export class DashboardComponent{
 
   
   ngOnInit() {
-    this.userService.getUserCart("Afonso").subscribe(items =>
-      console.log(items))
+    this.itemService.getItemByTitle("Zelda").subscribe(item =>
+      this.userService.deleteItemUserCart("Afonso", item).subscribe(result => console.log(result)))
   }
 
   showNotImplemented(){
@@ -37,7 +37,4 @@ export class DashboardComponent{
     this.router.navigate(['/user-details']);
   }
 
-  /**goToCart(): void{
-    this.router.navigate(['/cart']);
-  }*/
 }
