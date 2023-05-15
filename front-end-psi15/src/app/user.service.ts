@@ -105,7 +105,7 @@ export class UserService {
     }
   }
 
-  addItemToCart(item: Item, username: string){
+  addItemToCart(username: string, item: Item){
     return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
   }
 
