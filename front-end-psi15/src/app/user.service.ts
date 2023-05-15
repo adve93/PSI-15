@@ -55,7 +55,7 @@ export class UserService {
     this.router.navigate([`/itemDetail/${title}`]);
   }
 
-  getLoggedInUser(): String {
+  getLoggedInUser(): string {
     return this.loggedInUser;
   }
 
