@@ -156,6 +156,10 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
       if(userInstance.cart.has(itemTitle)) {
         var copies = userInstance.cart.get(itemTitle);
         userInstance.cart.set(itemTitle, copies - 1);
+        copies = userInstance.cart.get(itemTitle);
+        if(copies <= 0) {
+          userInstance.cart.delete(itemTitle);
+        }
         await userInstance.save();
         res.status(200).send('Item removed successfully');
       } else {
