@@ -20,6 +20,8 @@ export class UserService {
     const user = {
       username: username,
       password: password,
+      cart: new Map(),
+      games: new Map(),
       image: '../assets/pic1.jpg'
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
@@ -103,8 +105,16 @@ export class UserService {
     }
   }
 
-  addItemToCart(item: Item, username: string){
+  addItemToCart(username: string, item: Item){
     return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
+  }
+
+  getUserCart(username: string) {
+    return this.http.get(`${this.backEnd}/user/cart/${username}`);
+  }
+
+  deleteItemUserCart(username: string, item: Item) {
+    return this.http.post(`${this.backEnd}/user/deleteItem/${username}`, item);
   }
 
   getNumberOfItemsIncCart(item: Item, username: string): Number{

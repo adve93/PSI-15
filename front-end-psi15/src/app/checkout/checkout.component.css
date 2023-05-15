@@ -1,0 +1,43 @@
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    min-height: 100vh;
+    padding-bottom: 70px;
+    background: linear-gradient(90deg , rgba(238,238,238,255) 60%, rgba(174,174,174,255) 40.1%);
+}
+
+.container form{
+    padding: 20px;
+    width: 700px;
+    background: white;
+
+}
+
+.container form .row{
+    
+}
+
+
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
