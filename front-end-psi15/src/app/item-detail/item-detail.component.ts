@@ -54,4 +54,8 @@ export class ItemDetailComponent {
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }
+
+  goToCheckout(){
+    this.router.navigate(['/checkout']);
+  }
 }

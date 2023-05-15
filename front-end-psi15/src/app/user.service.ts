@@ -59,7 +59,7 @@ export class UserService {
     this.router.navigate([`/itemDetail/${title}`]);
   }
 
-  getLoggedInUser(): String | null{
+  getLoggedInUser(): string{
     const cookieArray = document.cookie.split(';');
     return cookieArray[1];
   }

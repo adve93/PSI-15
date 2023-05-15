@@ -1,13 +1,14 @@
 <body>
-
-    <div class="container">
-        <header>
-            <h1>Almost there!</h1>
-            <h2> Just a few last steps to finishing your sale </h2>
-            <div class="direita">
-        <!---<button (click)="goToCart()">Go back</button>-->
+    <header>
+        <div class="esquerda">
+        <h1>Checkout</h1>
+        <h2> Almost there! <br> Just a few last steps to finish  </h2>
         </div>
-        </header>
+        <div class="direita">
+        <button (click)="goToDashboard()">Go back</button>
+        </div>
+    </header>
+    <div class="container">
         <div>
             <!-- (submit)="finalCheckout(NIF.value, morada.value)"-->
             <form>
@@ -21,28 +22,36 @@
                             <span>NIF:</span>
                             <input type="text" placeholder="123456789">
                         </div>
+
+                        <div class="inputBox">
+                            <span>email:</span>
+                            <input type="email" placeholder="example@example.com">
+                        </div>
+
                         <div class="inputBox">
                         <!--<label for="morada">Morada:</label>-->
                         <!--<input type="text" id="morada" name="password" placeholder="Rua Dona Arlinda" #moradaInput>-->
                             <span>Morada:</span>
                             <input type="text" placeholder="Rua Dona Arlinda">
                         </div>
-                        <div class="inputBox">
-                            <span>Cidade:</span>
-                            <input type="text" placeholder="Lisboa">
-                        </div>
-                        <div class="inputBox">
-                            <span>Código postal:</span>
-                            <input type="text" placeholder="1234-567">
+                        <div class="flex">
+                            <div class="inputBox">
+                                <span>Cidade:</span>
+                                <input type="text" placeholder="Lisboa">
+                            </div>
+                            <div class="inputBox">
+                                <span>Código postal:</span>
+                                <input type="text" placeholder="1234-567">
+                            </div>
                         </div>
                     </div>
                     
                     <div class="col">
                         <h3 class="title"> Payment method
-                        <span class="material-symbols-outlined">credit_card</span>
+                            <!--<span class="material-symbols-outlined" >credit_card</span>-->
                         </h3>
                         <div class="inputBox">
-                            <span>cards accepted:</span>
+                            <span>cards accepted: </span>
                             <select name="format" id="format">
                                 <option selected disabled>Choose an Option</option>
                                 <option value="credit">Credit</option>
@@ -54,14 +63,25 @@
                             <span>name on card:</span>
                             <input type="text" placeholder="Felizberto Rodrigues">
                         </div>
-    
+                        
                         <div class="inputBox">
-                            <span>Morada:</span>
-                            <input type="text" placeholder="Rua Dona Arlinda">
+                            <span>Number on card:</span>
+                            <input type="text" placeholder="1111 2222 3333 4444">
+                        </div>
+                        <div class="flex">
+                            <div class="inputBox">
+                                <span>exp date:</span>
+                                <input type="text" placeholder="07/23">
+                            </div>
+
+                            <div class="inputBox">
+                                <span>Security number:</span>
+                                <input type="text" placeholder="123">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <input type="submit" value="Submit" class="submit-btn">
+                <input (click)="checkout()" type="submit" value="Ready to submit" class="submit-btn">
             </form>
         </div>
     </div>
