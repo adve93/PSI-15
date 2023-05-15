@@ -20,6 +20,8 @@ export class UserService {
     const user = {
       username: username,
       password: password,
+      cart: new Map(),
+      games: new Map(),
       image: '../assets/pic1.jpg'
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
