@@ -4,16 +4,17 @@
         <button (click)="returnToProfile()">Go back</button>
     </header>
     <div>
-        <p><strong>Profile Picture:</strong> Not profile picture selected</p>
-        <p><strong>Username:</strong> {{tempuser.username}}</p>
-        <p><strong>Wallet:</strong> {{tempuser.wallet}}</p>
-    </div>
-    
-    <div>
         <p> Alterar Nome: </p> <br>
         <input id="username" type="text" #username/>
-        <p> Alterar imagem: </p> <br>
-        <input id= "imagepath" type="image"  #imagepath/>   
-        <button (click)="updateUser(username.value, imagepath.value)">Update Profile</button>
     </div>
-    </body>
+    <div>
+        <h2>Select your profile picture:</h2>
+        <div *ngFor="let image of images">
+            <label>
+              <input type="radio" name="profile-picture" [value]="image.src" [(ngModel)]="selectedImg">
+              <img [src]="image.src" [alt]="image.alt" style="width: 100px; height: 100px;">
+            </label>
+          </div>
+        <button (click)="updateUser(username.value, selectedImg)">Update Profile</button>
+    </div>
+</body>

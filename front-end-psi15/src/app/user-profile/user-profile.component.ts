@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit{
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-      this.getUser();
+    this.getUser();
   }
 
   getUser() {

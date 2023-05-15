@@ -12,7 +12,7 @@ export class UserService {
 
   private backEnd = 'http://localhost:3065';
 
-  private loggedInUser: String | null = null;
+  loggedInUser = "";
 
   constructor (private http: HttpClient, private router: Router) {}
 
@@ -54,8 +54,7 @@ export class UserService {
   }
 
   getLoggedInUser(): string{
-    const cookieArray = document.cookie.split(';');
-    return cookieArray[1].toString();
+    return this.loggedInUser;
   }
 
   isLoggedIn(): boolean {
@@ -71,7 +70,8 @@ export class UserService {
   }
 
   postUpdateUser(user: User, oldUsername: string) {
-    return this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user);
+    this.loggedInUser = user.username;
+    this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user).subscribe();
   }
 
   userLogin(username: string, password: string){
@@ -87,7 +87,7 @@ export class UserService {
         (userPassword: string) => {
           if(userPassword === password) {
             window.alert('Succesfully logged in!');
-            document.cookie = username;
+            this.loggedInUser = username;
             this.router.navigate(['/dashboard']);
           } else {
             window.alert('Password incorrect!');
@@ -103,7 +103,6 @@ export class UserService {
   }
 
   getNumberOfItemsIncCart(item: Item){
-
     //Discutir implementação
     //return this.http.get<Number>(`${this.backEnd}/user/getItemNumber/:username`, item);
   }
