@@ -17,11 +17,12 @@ export class DashboardComponent{
 
   constructor(private router: Router, private itemService: ItemService, private userService: UserService){}
 
-  /*
+
   ngOnInit() {
     this.itemService.getItemByTitle("Zelda").subscribe(item =>
       this.userService.addItemToCart("Afonso", item).subscribe(result => console.log(result)))
-  }*/
+  }
+
 
   showNotImplemented(){
     window.alert('Feature not implemented.');
@@ -37,4 +38,7 @@ export class DashboardComponent{
     this.router.navigate(['/user-details']);
   }
 
+  /**goToCart(){
+    this.router.navigate(['/cart']);
+  }*/
 }
