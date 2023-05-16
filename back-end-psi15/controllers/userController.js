@@ -148,18 +148,31 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
     return res.status(400).send("User does not exist!")
   else {
     
-    const itemTitle = req.params.title;
-    const itemIndex = user.cart.findIndex(item => item.type === itemTitle);
-    if (itemIndex === -1) {
-      return res.status(404).send('Item not found in cart');
+    const cartItem = req.body.item;
+    if(userInstance.cart.has(cartItem)) {
+      var copies = userInstance.cart.get(cartItem);
+      userInstance.cart.set(cartItem, copies - 1);
+      await userInstance.save().exec();
+      res.status(200).send('Item removed successfully');
+
+    } else {
+      return res.status(400).send("Item does not exist!")
     }
-
-    userInstance.cart.splice(itemIndex, 1);
-    await userInstance.save();
-
-    res.status(200).send('Item removed from cart successfully');
   }
-  
+
+
+});
+
+exports.user_getGames_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    
+    const games = userInstance.games;
+    res.status(200).send(games);
+  }
 });
 
 exports.user_addCart_post = asyncHandler(async (req, res, next) => { 
@@ -178,6 +191,7 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
       await userInstance.save().exec();
       res.status(200).send('Item added to cart successfully');
     }
+
   }
 
 });

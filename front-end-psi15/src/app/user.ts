@@ -7,4 +7,5 @@ export interface User{
     games: Map<Item, Date>;
     cart: Map<Item, number>;
     image: string;
+
 }

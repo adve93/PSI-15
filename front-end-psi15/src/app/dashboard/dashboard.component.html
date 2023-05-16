@@ -1,13 +1,13 @@
 <body>
 	<header>
 		<h1>Dashboard</h1>
-		<div>
+		<div class="direita">
 			<button (click)="goToUserProfile()">Profile</button>
-			<button>
-				<span class="material-symbols-outlined">
-					shopping_cart
-					</span>
-			</button>
+			<div class="cart">
+				<!--(click)="goToCart()"-->
+				<button class="material-symbols-outlined" >shopping_cart</button>
+				<span class="quantity">0</span>
+			</div>
 		</div>
 	</header>
 	<nav>

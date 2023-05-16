@@ -98,13 +98,18 @@ export class UserService {
     }
   }
 
-  addItemToCart(item: Item){
-    return this.http.post(`${this.backEnd}/user/addItem/:username`, item);
+  addItemToCart(item: Item, username: string){
+    return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
   }
 
-  getNumberOfItemsIncCart(item: Item){
-    //Discutir implementação
-    //return this.http.get<Number>(`${this.backEnd}/user/getItemNumber/:username`, item);
+  getNumberOfItemsIncCart(item: Item, username: string): Number{
+    var value: any;
+    this.http.get<Map<Item,Number>>(`${this.backEnd}/user/getCart/${username}`).subscribe(
+      (response: Map<Item,Number>) => {
+        value = response.get(item);
+      }
+    );
+    return value;
   }
 
   deleteUserByUsername(username: string) {

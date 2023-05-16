@@ -1,0 +1,103 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #333;
+}
+
+header {
+	background-color: #ffffff;
+	color: #ffffff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+}
+
+nav {
+	background-color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+	align-items: center;
+}
+
+nav ul li {
+	margin-right: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 25px;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+}
+
+nav ul li a {
+	padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 25px;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+}
+
+main {
+	padding: 20px;
+	text-align: center;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+header .direita{
+  display: flex;
+  justify-content: space-between;
+}
+
+header .cart{
+  position: relative;
+  text-align: right;
+}
+
+header .quantity{
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -5px;
+  left: 63%;
+  padding: 3px 10px;
+}

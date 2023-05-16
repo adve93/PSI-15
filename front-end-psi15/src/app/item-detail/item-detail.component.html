@@ -1,7 +1,15 @@
 <body>
     <header>
         <h1>Item detail</h1>
-        <button (click)="goToDashboard()">Go back</button>
+        <div class="direita">
+			<button (click)="goToDashboard()">Go back</button>
+			<div class="cart">
+				<button class="material-symbols-outlined">
+					shopping_cart
+				</button>
+				<span class="quantity">0</span>
+			</div>
+		</div>
     </header>
     <div>
         <p><strong>Item Picture:</strong> Not item picture selected</p>
@@ -13,4 +21,5 @@
         <p><strong>Price:</strong> {{tempItem.price}}</p>
         <p><strong>Classification:</strong> {{tempItem.classification}}</p>
     </div>
+    <!--<button (click)="itemToCard()">Add+</button>-->
 </body>
