@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit{
     wallet: 0,
     games: new Map<Item, Date>(),
     cart: new Map<Item, number>(),
-    image: "ola"
+    image: ""
   };
 
   constructor(private userService: UserService, private router: Router) { }
