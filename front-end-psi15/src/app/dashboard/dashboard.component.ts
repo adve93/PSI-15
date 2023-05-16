@@ -26,12 +26,8 @@ export class DashboardComponent{
     this.itemService.getItemList().subscribe(items => this.items = items.slice(1, 5));
   }
 
-
   goToUserProfile(): void{
     this.router.navigate(['/user-details']);
   }
-
-  /**goToCart(): void{
-    this.router.navigate(['/cart']);
-  }*/
+  
 }
