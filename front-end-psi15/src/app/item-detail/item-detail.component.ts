@@ -38,7 +38,14 @@ export class ItemDetailComponent {
     this.getItem(this.title);
     this.username = this.userService.getLoggedInUser();
     this.username = this.username.trim();
-    this.userService.getCartSizeByUsername(this.username).subscribe(size => this.cartSize);
+    this.userService.getCartSizeByUsername(this.username).subscribe(response => {
+      const size = Number(response);
+      if (!isNaN(size)) {
+       this.cartSize = size;
+     } else {
+       console.error('Invalid cart size:', response);
+     }
+   });
   }
 
   
@@ -65,8 +72,7 @@ export class ItemDetailComponent {
   }
 
   itemToCard(){
-    console.log(this.username);
     this.itemService.getItemByTitle(this.title).subscribe
-    (item=> this.userService.addItemToCart(item,this.username).subscribe(msg => console.log(msg)))
+    (item=> this.userService.addItemToCart(item,this.username).subscribe());
 }
 }

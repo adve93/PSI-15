@@ -55,11 +55,13 @@ export class UserService {
     this.router.navigate([`/itemDetail/${title}`]);
   }
 
-  getLoggedInUser(): String | null{
+  getLoggedInUser(): string{
     return this.loggedInUser;
-    
+  }
+
   isLoggedIn(): boolean {
     return this.loggedInUser != "";
+  }
 
   getUserList() {
     return this.http.get<User[]>(`${this.backEnd}/user/`);
