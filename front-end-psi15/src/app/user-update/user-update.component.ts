@@ -46,6 +46,5 @@ export class UserUpdateComponent {
     if(updatedImage)
     this.tempuser.image = updatedImage;
     this.userService.postUpdateUser(this.tempuser, this.oldUsername);
-    window.alert("Changes saved! Feel free to go back");
   }
 }

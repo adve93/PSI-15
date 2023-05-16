@@ -54,7 +54,7 @@ export class UserService {
   displayItem(title: string){
     this.router.navigate([`/itemDetail/${title}`]);
   }
-
+  
   getLoggedInUser(): string{
     return this.loggedInUser;
   }
@@ -62,6 +62,7 @@ export class UserService {
   isLoggedIn(): boolean {
     return this.loggedInUser != "";
   }
+
 
   getUserList() {
     return this.http.get<User[]>(`${this.backEnd}/user/`);
@@ -73,7 +74,30 @@ export class UserService {
 
   postUpdateUser(user: User, oldUsername: string) {
     this.loggedInUser = user.username;
-    this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user).subscribe();
+    this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user, { observe: 'response' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 422) {
+          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
+          const errorMessages = errors[0].join(', ');
+          window.alert(errorMessages);
+        }
+        if (error.status === 500) {
+          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
+          const errorMessages = errors[0].join(', ');
+          window.alert(errorMessages);
+        }
+        return throwError(error.message);
+      })
+    ).subscribe(
+      (response: HttpResponse<any>) => {
+        if(response.status === 200){
+          window.alert('New username/profile picture saved.');
+        }
+      },
+      (error) => {
+        console.log('Error:', error);
+      }
+    );
   }
 
   userLogin(username: string, password: string){
