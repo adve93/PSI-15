@@ -54,10 +54,15 @@ export class UserService {
   displayItem(title: string){
     this.router.navigate([`/itemDetail/${title}`]);
   }
-
-  getLoggedInUser(): string {
+  
+  getLoggedInUser(): string{
     return this.loggedInUser;
   }
+
+  isLoggedIn(): boolean {
+    return this.loggedInUser != "";
+  }
+
 
   getUserList() {
     return this.http.get<User[]>(`${this.backEnd}/user/`);
@@ -122,16 +127,6 @@ export class UserService {
 
   addItemToCart(item: Item, username: string){
     return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
-  }
-
-  getNumberOfItemsIncCart(item: Item, username: string): Number{
-    var value: any;
-    this.http.get<Map<Item,Number>>(`${this.backEnd}/user/getCart/${username}`).subscribe(
-      (response: Map<Item,Number>) => {
-        value = response.get(item);
-      }
-    );
-    return value;
   }
 
   deleteUserByUsername(username: string) {

@@ -25,7 +25,7 @@ export class UserUpdateComponent {
     wallet: 0,
     games: new Map<String, Date>(),
     cart: new Map<String, number>(),
-    image: "ola"
+    image: ""
   };
   selectedImg: string = "";
   ngOnInit(){
