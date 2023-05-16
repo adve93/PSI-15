@@ -15,8 +15,8 @@ export class UserProfileComponent implements OnInit{
     username: "",
     password: "",
     wallet: 0,
-    games: new Map<Item, Date>(),
-    cart: new Map<Item, number>(),
+    games: new Map<string, Date>(),
+    cart: new Map<string, number>(),
     image: ""
   };
 

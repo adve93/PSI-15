@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-item-detail',
@@ -10,9 +11,13 @@ import { ItemService } from '../item.service';
 })
 export class ItemDetailComponent {
 
-  constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemService){}
+  constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemService, private userService: UserService){}
 
   title: string = "";
+
+  username: string = "";
+
+  cartSize = 0;
 
   tempItem: Item = {
     type: "",
@@ -31,8 +36,12 @@ export class ItemDetailComponent {
       this.title = <string> params.get('title');
     })
     this.getItem(this.title);
+    this.username = this.userService.getLoggedInUser();
+    this.username = this.username.trim();
+    this.userService.getCartSizeByUsername(this.username).subscribe(size => this.cartSize);
   }
 
+  
   getItem(title: string) {
     
     title.trim();
@@ -54,4 +63,10 @@ export class ItemDetailComponent {
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }
+
+  itemToCard(){
+    console.log(this.username);
+    this.itemService.getItemByTitle(this.title).subscribe
+    (item=> this.userService.addItemToCart(item,this.username).subscribe(msg => console.log(msg)))
+}
 }

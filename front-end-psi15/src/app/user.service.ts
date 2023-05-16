@@ -57,7 +57,9 @@ export class UserService {
 
   getLoggedInUser(): String | null{
     return this.loggedInUser;
-  }
+    
+  isLoggedIn(): boolean {
+    return this.loggedInUser != "";
 
   getUserList() {
     return this.http.get<User[]>(`${this.backEnd}/user/`);
@@ -85,6 +87,7 @@ export class UserService {
         (userPassword: string) => {
           if(userPassword === password) {
             window.alert('Succesfully logged in!');
+            document.cookie = username;
             this.loggedInUser = username;
             this.router.navigate(['/dashboard']);
           } else {
@@ -112,5 +115,9 @@ export class UserService {
 
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
+  }
+
+  getCartSizeByUsername(username: string) {
+    return this.http.get(`${this.backEnd}/user/cartSize/${username}`);
   }
 }

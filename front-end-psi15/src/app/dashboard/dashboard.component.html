@@ -4,9 +4,10 @@
 		<div class="direita">
 			<button (click)="goToUserProfile()">Profile</button>
 			<div class="cart">
-				<!--(click)="goToCart()"-->
-				<button class="material-symbols-outlined" >shopping_cart</button>
-				<span class="quantity">0</span>
+				<button class="material-symbols-outlined">
+					shopping_cart
+				</button>
+				<span class="quantity">{{ cartSize }}</span>
 			</div>
 		</div>
 	</header>
