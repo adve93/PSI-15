@@ -5,12 +5,18 @@
 </header>
 <div>
     <p><strong>Profile Picture:</strong> Not profile picture selected</p>
+    <label>
+        <img [src]="user.image" style="width: 100px; height: 100px;">
+    </label>
+</div>
+<div>
     <p><strong>Username:</strong> {{user.username}}</p>
     <p><strong>Wallet:</strong> {{user.wallet}}</p>
 </div>
 
 <div>
     <button (click)="showNotImplemented()">My Library</button>
-    <button (click)="showNotImplemented()">My List</button>
+    <button (click)="showNotImplemented()">My List</button> 
+    <button (click)="redirectUserUpdate()">Update Profile</button>
 </div>
 </body>
