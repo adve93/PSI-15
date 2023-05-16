@@ -22,7 +22,7 @@ export class UserService {
       password: password,
       cart: new Map(),
       games: new Map(),
-      image: '../assets/pic1.jpg'
+      image: '../assets/pfpPics/pic1.jpg'
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -55,13 +55,11 @@ export class UserService {
     this.router.navigate([`/itemDetail/${title}`]);
   }
 
-  getLoggedInUser(): string {
+  getLoggedInUser(): String | null{
     return this.loggedInUser;
-  }
-
+    
   isLoggedIn(): boolean {
     return this.loggedInUser != "";
-  }
 
   getUserList() {
     return this.http.get<User[]>(`${this.backEnd}/user/`);
@@ -72,7 +70,8 @@ export class UserService {
   }
 
   postUpdateUser(user: User, oldUsername: string) {
-    return this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user);
+    this.loggedInUser = user.username;
+    this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user).subscribe();
   }
 
   userLogin(username: string, password: string){

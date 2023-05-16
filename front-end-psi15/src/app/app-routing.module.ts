@@ -10,6 +10,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main-page', pathMatch: 'full'},
@@ -17,10 +18,12 @@ const routes: Routes = [
   { path: 'user-register', component: RegisterPageComponent},
   { path: 'user-login', component: LoginPageComponent},
   { path: 'user-details', component: UserProfileComponent},
-  { path: 'item-detail/:title', component: ItemDetailComponent},
+  { path: 'item/:title', component: ItemDetailComponent},
   { path: 'dashboard', component: DashboardComponent},
-  { path: 'checkout', component: CheckoutComponent}
-
+  { path: 'checkout', component: CheckoutComponent},
+  { path: 'user-update', component: UserUpdateComponent},
+  { path: 'user-profile', component: UserProfileComponent}
+  //{ path: 'cart', component: CheckoutComponent}
 ];
 
 @NgModule({

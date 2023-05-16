@@ -17,13 +17,13 @@ export class UserProfileComponent implements OnInit{
     wallet: 0,
     games: new Map<string, Date>(),
     cart: new Map<string, number>(),
-    image: "ola"
+    image: ""
   };
 
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-      this.getUser();
+    this.getUser();
   }
 
   getUser() {
@@ -49,4 +49,8 @@ export class UserProfileComponent implements OnInit{
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }
+  redirectUserUpdate() {
+    this.router.navigate(['/user-update']);
+  }
+  
 }
