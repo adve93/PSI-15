@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
 import { UserService } from '../user.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-item-detail',
@@ -11,7 +13,7 @@ import { UserService } from '../user.service';
 })
 export class ItemDetailComponent {
 
-  constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemService, private userService: UserService){}
+  constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemService, private userService: UserService, private changeDetectorRef: ChangeDetectorRef){}
 
   title: string = "";
 
@@ -38,6 +40,10 @@ export class ItemDetailComponent {
     this.getItem(this.title);
     this.username = this.userService.getLoggedInUser();
     this.username = this.username.trim();
+    this.updateCartItemSize();
+  }
+
+  updateCartItemSize() {
     this.userService.getCartSizeByUsername(this.username).subscribe(response => {
       const size = Number(response);
       if (!isNaN(size)) {
@@ -47,6 +53,7 @@ export class ItemDetailComponent {
      }
    });
   }
+  
 
   
   getItem(title: string) {
@@ -74,5 +81,11 @@ export class ItemDetailComponent {
   itemToCard(){
     this.itemService.getItemByTitle(this.title).subscribe
     (item=> this.userService.addItemToCart(item,this.username).subscribe());
+    window.alert("Item added to the cart!");
+    setTimeout(() => {
+      this.updateCartItemSize();
+    }, 1000);
+    
+    
 }
 }

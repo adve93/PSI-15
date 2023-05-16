@@ -24,14 +24,18 @@ export class DashboardComponent{
   
   ngOnInit() {
     this.username = this.userService.getLoggedInUser();
+    this.updateCartItemSize();
+  }
+
+  updateCartItemSize() {
     this.userService.getCartSizeByUsername(this.username).subscribe(response => {
-       const size = Number(response);
-       if (!isNaN(size)) {
-        this.cartSize = size;
-      } else {
-        console.error('Invalid cart size:', response);
-      }
-    });
+      const size = Number(response);
+      if (!isNaN(size)) {
+       this.cartSize = size;
+     } else {
+       console.error('Invalid cart size:', response);
+     }
+   });
   }
 
   showNotImplemented(){

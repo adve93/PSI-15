@@ -105,16 +105,6 @@ export class UserService {
     return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
   }
 
-  getNumberOfItemsIncCart(item: Item, username: string): Number{
-    var value: any;
-    this.http.get<Map<Item,Number>>(`${this.backEnd}/user/getCart/${username}`).subscribe(
-      (response: Map<Item,Number>) => {
-        value = response.get(item);
-      }
-    );
-    return value;
-  }
-
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
   }
