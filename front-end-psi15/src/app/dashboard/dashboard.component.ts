@@ -14,10 +14,12 @@ import { UserService } from '../user.service';
 export class DashboardComponent{
 
   items: Item[] = [];
+  filteredItems: Item[] = [];
 
   username = "";
 
   cartSize = 0;
+  searchText: string = "";
 
   constructor(private router: Router, private itemService: ItemService, private userService: UserService){}
 
@@ -31,6 +33,11 @@ export class DashboardComponent{
     window.alert('Feature not implemented.');
   }
 
+  searchItems() {
+    this.filteredItems = this.items.filter(item =>
+      item.title.toLowerCase().includes(this.searchText.toLowerCase())
+    ).slice(0, 5);
+  }
 
   getItems(): void{
     this.itemService.getItemList().subscribe(items => this.items = items.slice(1, 5));
