@@ -23,8 +23,8 @@ export class UserUpdateComponent {
     username: "",
     password: "",
     wallet: 0,
-    games: new Map<Item, Date>(),
-    cart: new Map<Item, number>(),
+    games: new Map<String, Date>(),
+    cart: new Map<String, number>(),
     image: "ola"
   };
   selectedImg: string = "";
@@ -46,6 +46,5 @@ export class UserUpdateComponent {
     if(updatedImage)
     this.tempuser.image = updatedImage;
     this.userService.postUpdateUser(this.tempuser, this.oldUsername);
-    window.alert("Changes saved! Feel free to go back");
   }
 }
