@@ -15,6 +15,10 @@ export class ItemDetailComponent {
 
   title: string = "";
 
+  username: string = "";
+
+  cartSize = 0;
+
   tempItem: Item = {
     type: "",
     description: "",
@@ -32,8 +36,12 @@ export class ItemDetailComponent {
       this.title = <string> params.get('title');
     })
     this.getItem(this.title);
+    this.username = this.userService.getLoggedInUser();
+    this.username = this.username.trim();
+    this.userService.getCartSizeByUsername(this.username).subscribe(size => this.cartSize);
   }
 
+  
   getItem(title: string) {
     
     title.trim();
@@ -57,10 +65,8 @@ export class ItemDetailComponent {
   }
 
   itemToCard(){
-    var username = <string>this.userService.getLoggedInUser();
-    username = username.trim();
-    console.log(username);
+    console.log(this.username);
     this.itemService.getItemByTitle(this.title).subscribe
-    (item=> this.userService.addItemToCart(item,username).subscribe(msg => console.log(msg)))
+    (item=> this.userService.addItemToCart(item,this.username).subscribe(msg => console.log(msg)))
 }
 }

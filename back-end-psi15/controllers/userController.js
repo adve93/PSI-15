@@ -142,6 +142,23 @@ exports.user_cart_get = asyncHandler(async (req, res, next) => {
 
 });
 
+exports.user_cartSize_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    
+    const cartItems = userInstance.cart;
+    var cartSize = 0;
+    cartItems.forEach((value, key) => {
+      cartSize = cartSize + value;
+    });
+    res.status(200).json(cartSize);
+  }
+
+});
+
 exports.user_cart_delete = asyncHandler(async (req, res, next) => {
 
   const userInstance = await User.findOne({ username: req.params.username}).exec();

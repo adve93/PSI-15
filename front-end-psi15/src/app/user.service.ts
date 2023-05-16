@@ -117,4 +117,8 @@ export class UserService {
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
   }
+
+  getCartSizeByUsername(username: string) {
+    return this.http.get(`${this.backEnd}/user/cartSize/${username}`);
+  }
 }
