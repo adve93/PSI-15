@@ -49,4 +49,8 @@ export class UserProfileComponent implements OnInit{
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }
+
+  goToMyList(){
+    this.router.navigate(['/myList']);
+  }
 }
