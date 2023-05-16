@@ -170,6 +170,9 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
     return res.status(400).send('User not found');
   else {
     const itemInstance = await Item.findOne({ title: req.body.title}).exec();
+    if (itemIndex === -1) {
+      return res.status(404).send('Item not found in cart');
+    }
     const itemTitle = itemInstance.title;
     if(userInstance.cart.has(itemTitle)) {
       var copies = userInstance.cart.get(itemTitle);

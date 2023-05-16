@@ -57,8 +57,10 @@ export class ItemDetailComponent {
   }
 
   itemToCard(){
-      const username = this.userService.getLoggedInUser(); 
+    var username = <string>this.userService.getLoggedInUser();
+    username = username.trim();
+    console.log(username);
     this.itemService.getItemByTitle(this.title).subscribe
-    (item=> this.userService.addItemToCart(item,username).subscribe())
+    (item=> this.userService.addItemToCart(item,username).subscribe(msg => console.log(msg)))
 }
 }
