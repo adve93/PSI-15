@@ -12,6 +12,8 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { GameLibraryComponent } from './game-library/game-library.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/main-page', pathMatch: 'full'},
@@ -24,8 +26,8 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent},
   { path: 'user-update', component: UserUpdateComponent},
   { path: 'user-profile', component: UserProfileComponent},
-  { path: 'myList', component: GameLibraryComponent}
-  //{ path: 'cart', component: CheckoutComponent}
+  { path: 'myList', component: GameLibraryComponent},
+  { path: 'user-cart', component: UserCartComponent}
 ];
 
 @NgModule({
