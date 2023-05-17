@@ -51,8 +51,10 @@ export class DashboardComponent{
 
   goToLibrary() {
     this.router.navigate(['/myList']);
+  }
 
   goToCart(){
     this.router.navigate(['/user-cart']);
   }
+
 }

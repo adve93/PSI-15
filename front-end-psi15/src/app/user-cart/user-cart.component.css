@@ -1,75 +1,44 @@
-body {
-	margin: 0;
-	padding: 0;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+/* Container for the item list */
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-h1 {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 50px;
-  color: #333;
+/* Individual item card */
+.item-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 220px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-header {
-	background-color: #ffffff;
-	color: #ffffff;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 20px;
+/* Item image */
+.item-image {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
 }
 
-nav {
-	background-color: #ffffff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100px;
+/* Item title */
+.item-title {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-nav ul {
-	list-style: none;
-	display: flex;
-	align-items: center;
+/* Item price */
+.item-price {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-nav ul li {
-	margin-right: 20px;
-}
-
-button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #fff;
-  border-radius: 25px;
-  transition: background-color 0.2s ease-in-out;
-  background-color: #333;
-  border: none;
-  cursor: pointer;
-}
-
-nav ul li a {
-	padding: 10px 20px;
-  margin: 0 10px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #fff;
-  border-radius: 25px;
-  transition: background-color 0.2s ease-in-out;
-  background-color: #333;
-  border: none;
-  cursor: pointer;
-}
-
-main {
-	padding: 20px;
-	text-align: center;
+/* Item description */
+.item-description {
+  text-align: center;
 }

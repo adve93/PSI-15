@@ -1,8 +1,13 @@
-<div>
+<div class="item-list">
     <h2>User Cart</h2>
-    <ul>
-      <li *ngFor="let item of nGames">
-        {{ item[0] }}: {{ item[1] }}
+    <ul style="list-style-type: none;">
+      <li *ngFor="let item of items | keyvalue">
+        <div class="item-card">
+          <img class="item-image" src="{{ getItemImage(item.key) }}" alt="Item Image" />
+          <h3 class="item-title">{{ item.key }}</h3>
+          <p class="item-price">{{ item.value }}</p>
+          <p class="item-description">{{ getItemDetail(item.key) }}</p>
+        </div>
       </li>
     </ul>
 </div>
