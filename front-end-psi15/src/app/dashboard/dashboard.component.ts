@@ -25,7 +25,6 @@ export class DashboardComponent{
   ngOnInit() {
     this.username = this.userService.getLoggedInUser();
     this.updateCartItemSize();
-    this.userService.postUserCheckout("Afonso").subscribe();
   }
 
   updateCartItemSize() {
