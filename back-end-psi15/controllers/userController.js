@@ -236,7 +236,10 @@ exports.user_checkout_post = asyncHandler(async (req, res, next) => {
     else {
       userInstance.cart.forEach((value, key) => {
         for(i = 0; i < value; i++) {
-          userInstance.games.set(key + ": Copy_" + (i+1), new Date());
+          var count = 0;
+          while(userInstance.games.has(key + ": Copy_" + (i+1+count)))
+            count++;
+          userInstance.games.set(key + ": Copy_" + (i+1+count), new Date());
         }
       })
       userInstance.cart.clear();
