@@ -158,11 +158,14 @@ export class UserService {
   postUserCheckout(username: string) {
     return this.http.post(`${this.backEnd}/user/checkout/${username}`, username).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 422) {
+        if (error.status === 400) {
           window.alert(error.error);
         }
         if (error.status === 500) {
           window.alert(error.error);
+        }
+        if (error.status === 200) {
+          window.alert("Checkout succeseful!");
         }
         return throwError(error.message);
       }));

@@ -2,9 +2,9 @@
 	<header>
 		<h1>Dashboard</h1>
 		<div class="direita">
-			<button (click)="goToUserProfile()">Profile</button>
+			<button #myButton1 (click)="goToUserProfile()">Profile</button>
 			<div class="cart">
-				<button class="material-symbols-outlined" (click)="goToCart()">
+				<button #myButton2 class="material-symbols-outlined" (click)="goToCart()">
 					shopping_cart
 				</button>
 				<span class="quantity">{{ cartSize }}</span>
@@ -13,10 +13,10 @@
 	</header>
 	<nav>
 		<ul>
-			<li (click)="showNotImplemented()"><a>Lists</a></li>
-			<li (click)="goToLibrary()"><a>Library of Games</a></li>
-			<li (click)="showNotImplemented()"><a>Followers</a></li>
-			<li (click)="showNotImplemented()"><a>Following</a></li>
+			<button #myButton3 (click)="showNotImplemented()">Lists</button>
+			<button #myButton4 (click)="goToLibrary()">Library of Games</button>
+			<button #myButton5 (click)="showNotImplemented()">Followers</button>
+			<button #myButton6 (click)="showNotImplemented()">Following</button>
 
 		</ul>
 	</nav>

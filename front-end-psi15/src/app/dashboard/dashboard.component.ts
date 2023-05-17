@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from '../item';
 import { User } from '../user';
@@ -13,6 +13,8 @@ import { UserService } from '../user.service';
 })
 export class DashboardComponent{
 
+  @ViewChildren('myButton') myButtons!: QueryList<ElementRef>;
+
   items: Item[] = [];
   filteredItems: Item[] = [];
 
@@ -24,6 +26,13 @@ export class DashboardComponent{
   ngOnInit() {
     this.username = this.userService.getLoggedInUser();
     this.updateCartItemSize();
+  }
+
+  ngAfterViewInit() {
+    this.myButtons.forEach((button: ElementRef) => {
+      console.log(button.nativeElement.innerText); // Access button text
+      // Perform other operations on each button
+    });
   }
 
   updateCartItemSize() {
@@ -51,6 +60,7 @@ export class DashboardComponent{
 
   goToLibrary() {
     this.router.navigate(['/myList']);
+  }
 
   goToCart(){
     this.router.navigate(['/user-cart']);

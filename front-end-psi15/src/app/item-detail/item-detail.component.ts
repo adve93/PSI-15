@@ -89,6 +89,7 @@ export class ItemDetailComponent {
 
   goToCheckout(){
     this.router.navigate(['/checkout']);
+  }
   
   goToLibrary(){
     this.router.navigate(['/myList']);
