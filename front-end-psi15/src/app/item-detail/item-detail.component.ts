@@ -93,6 +93,8 @@ export class ItemDetailComponent {
     setTimeout(() => {
       this.updateCartItemSize();
     }, 1000);
- 
+  }
+  goToCart(){
+    this.router.navigate(['/user-cart']);
   }
 }
