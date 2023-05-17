@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -42,7 +42,8 @@ import { AlterDialogComponent } from './alter-dialog/alter-dialog.component';
     UserUpdateComponent,
     GameLibraryComponent,
     UserCartComponent,
-    AlterDialogComponent
+    AlterDialogComponent,
+    ItemDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,8 @@ import { AlterDialogComponent } from './alter-dialog/alter-dialog.component';
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [UserService, ItemService],
   bootstrap: [AppComponent]

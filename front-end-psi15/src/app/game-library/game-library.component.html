@@ -11,9 +11,7 @@
         <p>No items in library.</p>
     </div>
 
-    <div *ngIf="lib.length > 0">
-        <div *ngFor="let game of games; let i = index">
-            <p id="gameLink" (click)="goToItemPage(game)">Title:  {{ game }} / Date of aquistion: {{ dates[i] }}</p>
-        </div>
+    <div *ngFor="let game of games; let i = index">
+        <p id="gameLink" tabindex="0" (keydown.enter)="goToItemPage(game)" (click)="goToItemPage(game)">Title:  {{ game }} / Date of aquistion: {{ dates[i] }}</p>
     </div>
 </body>
