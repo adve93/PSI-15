@@ -43,9 +43,10 @@ export class CheckoutComponent {
   }
 
   checkout() {
-    if (this.checkoutForm.valid) {
-      const username = this.userService.getLoggedInUser();
-      this.userService.postUserCheckout(username).subscribe(item => console.log(item));
+    //if (this.checkoutForm.valid) {
+      var username = this.userService.getLoggedInUser();
+      username = username.trim();
+      this.userService.postUserCheckout(username).subscribe(); /*
     } else {
       this.checkoutForm.markAllAsTouched();
       if (this.checkoutForm.get('nif')?.invalid ||
@@ -60,6 +61,6 @@ export class CheckoutComponent {
           this.checkoutForm.get('securityNumber')?.invalid) {
         alert('Incorrectly filled or Empty sections');
       }
-    }
+    }*/
   }
 }
