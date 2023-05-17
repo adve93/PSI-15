@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'checkout', component: CheckoutComponent},
   { path: 'user-update', component: UserUpdateComponent},
-  { path: 'user-profile', component: UserProfileComponent}
+  { path: 'user-profile', component: UserProfileComponent},
   { path: 'myList', component: GameLibraryComponent}
   //{ path: 'cart', component: CheckoutComponent}
 ];
