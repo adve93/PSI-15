@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-alter-dialog',
@@ -8,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class AlterDialogComponent {
 
+
   quantity = 0;
 
   constructor(
@@ -15,11 +17,11 @@ export class AlterDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { itemKey: string }
   ) { }
 
-  onCancelClick(): void {
+  onCancel(): void {
     this.dialogRef.close();
   }
 
-  onOkClick(): void {
+  onOk(): void {
     this.dialogRef.close(this.quantity);
   }
 }

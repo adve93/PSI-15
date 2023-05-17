@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -16,7 +17,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemDetailComponent } from './item-detail/item-detail.component'; 
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 //Services
 import { ItemService } from './item.service';
 import { UserService } from './user.service';
@@ -48,7 +50,10 @@ import { AlterDialogComponent } from './alter-dialog/alter-dialog.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [UserService, ItemService],
   bootstrap: [AppComponent]

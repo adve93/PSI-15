@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Item } from '../item';
 import { UserService } from '../user.service';
 import { ItemService } from '../item.service';
-import { Observable, flatMap, of } from 'rxjs';
+import { Observable, flatMap, forkJoin, of } from 'rxjs';
 import { User } from '../user';
 import { MatDialog } from '@angular/material/dialog';
 import { AlterDialogComponent } from '../alter-dialog/alter-dialog.component';
@@ -47,7 +47,22 @@ export class UserCartComponent {
   }
   
   alterItems(itemKey: string, result: any) {
-    throw new Error('Method not implemented.');
+    if(result > 0){
+      for(let i = 0; i < result; i++){
+        this.itemService.getItemByTitle(itemKey).subscribe((item: Item) => {
+          console.log("entrou");
+          this.userService.addItemToCart(this.userService.getLoggedInUser(), item).subscribe();
+        });
+      }
+    }
+    if(result < 0){
+      for(let i = 0; i < (-result); i++){
+        this.itemService.getItemByTitle(itemKey).subscribe((item: Item) => {
+          console.log("entrou");
+          this.userService.deleteItemUserCart(this.userService.getLoggedInUser(), item).subscribe();
+        });
+      }
+    }
   }
 
   getItemDetail(title: string): string {

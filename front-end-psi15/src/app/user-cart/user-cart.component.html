@@ -12,7 +12,7 @@
             <div class="item-card">
             <img class="item-image" src="{{ getItemImage(item.key) }}" alt="Item Image" />
             <h3 class="item-title">{{ item.key }}</h3>
-            <p class="item-price">{{ item.value }}</p>
+            <p id="item-quantity" class="item-price">{{ item.value }}</p>
             <p class="item-description">{{ getItemDetail(item.key) }}</p>
             <button class="delete-button" (click)="deleteItemFromCart(item.key)">Delete</button>
             <button class="alter-button" (click)="openAlterDialog(item.key)">Alter</button>
@@ -20,4 +20,5 @@
         </li>
         </ul>
     </div>
+    
 </body>
