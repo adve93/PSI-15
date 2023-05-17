@@ -196,7 +196,7 @@ exports.user_getGames_get = asyncHandler(async (req, res, next) => {
   else {
     
     const games = userInstance.games;
-    res.status(200).send(games);
+    res.status(200).json(Array.from(games));
   }
 });
 
@@ -220,8 +220,6 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
       userInstance.cart.set(itemTitle, 1);
       await userInstance.save();
       return res.status(200).send('Item added to cart successfully');
-    if(!itemInstance)
-      return res.status(400).send("Item does not exist!")
     }
   }
 
@@ -238,7 +236,13 @@ exports.user_checkout_post = asyncHandler(async (req, res, next) => {
     else {
       userInstance.cart.forEach((value, key) => {
         for(i = 0; i < value; i++) {
-          userInstance.games.set(key + ": Copy_" + (i+1), new Date());
+          const currentDate = new Date();
+          const day = currentDate.getDate();
+          const month = currentDate.getMonth() + 1; // Adding 1 because months are zero-based
+          const year = currentDate.getFullYear();
+
+          const gameDate = new Date(year, month - 1, day);
+          userInstance.games.set(key + ": Copy_" + (i+1), gameDate);
         }
       })
       userInstance.cart.clear();

@@ -1,1 +1,22 @@
-<p>game-library works!</p>
+<body>
+    <header>
+        <h1>My Library - {{username}}</h1>
+        <button (click)="sortByTitle = !sortByTitle">Sort by Title</button>
+        <button (click)="sortByDate = !sortByDate">Sort by Date</button>
+        <button id="goBack" (click)="goToProfile()">Go back</button>
+    </header>
+
+    <div *ngIf="lib.length === 0">
+        <p>No items in library.</p>
+    </div>
+
+    <div *ngIf="lib.length > 0">
+        <div *ngFor="let element of lib">
+            <div *ngFor="let ex of element; let i = index;">
+                <div *ngIf="i % 2 === 0">
+                    <p id="gameLink" (click)="goToItemPage(element[i])">Title:  {{ element[i] }} Date: {{ element[i + 1] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
