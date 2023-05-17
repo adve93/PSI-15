@@ -17,6 +17,8 @@ router.get("/cart/:username", user_controller.user_cart_get);
 
 router.post("/deleteItem/:username", user_controller.user_cart_delete);
 
+router.post("/deleteItemAll/:username", user_controller.user_cart_delete_all);
+
 router.post("/addItem/:username", user_controller.user_addCart_post);
 
 router.get("/games/:username", user_controller.user_getGames_get); 

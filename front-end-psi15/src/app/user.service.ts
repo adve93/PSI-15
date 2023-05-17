@@ -155,6 +155,12 @@ export class UserService {
     return value;
   }
 
+
+  deleteItemFromCart(username: string, item: Item){
+    return this.http.post(`${this.backEnd}/user/deleteItemAll/${username}`, item).subscribe();
+  }
+
+
   postUserCheckout(username: string) {
     return this.http.post(`${this.backEnd}/user/checkout/${username}`, username).pipe(
       catchError((error: HttpErrorResponse) => {

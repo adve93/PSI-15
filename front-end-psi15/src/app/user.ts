@@ -5,7 +5,7 @@ export interface User{
     password: string;
     wallet: number;
     games: Map<String, Date>;
-    cart: Map<String, number>;
+    cart: Map<string, number>;
     image: string;
 
 }

@@ -188,6 +188,31 @@ exports.user_cart_delete = asyncHandler(async (req, res, next) => {
 
 });
 
+
+exports.user_cart_delete_all = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    const itemInstance = await Item.findOne({ title: req.body.title}).exec();  
+    if(!itemInstance)
+      return res.status(400).send("Item does not exist!")
+    else {
+      const itemTitle = itemInstance.title;
+      if(userInstance.cart.has(itemTitle)) {
+        userInstance.cart.delete(itemTitle);
+        await userInstance.save();
+        res.status(200).send('Item removed successfully');
+      } else {
+        return res.status(400).send("Item does not exist in the cart!")
+      }
+   }
+  }
+
+
+});
+
 exports.user_getGames_get = asyncHandler(async (req, res, next) => {
 
   const userInstance = await User.findOne({ username: req.params.username}).exec();

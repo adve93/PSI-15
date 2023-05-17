@@ -65,4 +65,5 @@ export class DashboardComponent{
   goToCart(){
     this.router.navigate(['/user-cart']);
   }
+
 }

@@ -24,7 +24,7 @@ export class UserUpdateComponent {
     password: "",
     wallet: 0,
     games: new Map<String, Date>(),
-    cart: new Map<String, number>(),
+    cart: new Map<string, number>(),
     image: ""
   };
   selectedImg: string = "";

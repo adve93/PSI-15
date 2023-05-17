@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -15,7 +16,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemDetailComponent } from './item-detail/item-detail.component'; 
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 //Services
 import { ItemService } from './item.service';
 import { UserService } from './user.service';
@@ -24,6 +27,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { GameLibraryComponent } from './game-library/game-library.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { AlterDialogComponent } from './alter-dialog/alter-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +41,9 @@ import { UserCartComponent } from './user-cart/user-cart.component';
     CheckoutComponent,
     UserUpdateComponent,
     GameLibraryComponent,
-    ItemDetailComponent,
-    UserCartComponent
-
+    UserCartComponent,
+    AlterDialogComponent,
+    ItemDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,10 @@ import { UserCartComponent } from './user-cart/user-cart.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     ReactiveFormsModule
   ],
   providers: [UserService, ItemService],

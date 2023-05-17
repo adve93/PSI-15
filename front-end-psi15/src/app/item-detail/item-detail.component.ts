@@ -30,7 +30,7 @@ export class ItemDetailComponent {
     price: 0,
     classification: 0,
     title: "",
-    image: "ola",
+    image: "",
     optional_links: []
   };
 
@@ -95,6 +95,9 @@ export class ItemDetailComponent {
     this.router.navigate(['/myList']);
   }
 
+  goToCart(){
+    this.router.navigate(['/user-cart']);
+  }
   itemToCard(){
     this.itemService.getItemByTitle(this.title).subscribe
     (item=> this.userService.addItemToCart(this.username, item).subscribe());
@@ -102,6 +105,6 @@ export class ItemDetailComponent {
     setTimeout(() => {
       this.updateCartItemSize();
     }, 1000);
- 
   }
+
 }
