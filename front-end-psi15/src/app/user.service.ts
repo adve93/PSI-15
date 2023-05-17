@@ -103,27 +103,31 @@ export class UserService {
 
   userLogin(username: string, password: string){
     var user = this.getUserByUsername(username);
-    if(!user) {
-      window.alert("User não existe!");
-    } else {
-      user.pipe(
-        map(user => user as User),
-        map(user => user.password)
-      )
-      .subscribe(
-        (userPassword: string) => {
-          if(userPassword === password) {
-            window.alert('Succesfully logged in!');
-            document.cookie = username;
-            this.loggedInUser = username;
-            this.router.navigate(['/dashboard']);
-          } else {
-            window.alert('Password incorrect!');
-          }
-        },
-        error => console.log('Error', error)
-      )
-    }
+    user.subscribe(user => {
+       if(!user) {
+        window.alert("User não existe!");
+        return;
+      }
+    })
+    user.pipe(
+      map(user => user as User),
+      map(user => user.password)
+    )
+    .subscribe(
+      (userPassword: string) => {
+        if(userPassword === null && userPassword === undefined)
+          return window.alert("User não existe!");
+        if(userPassword === password) {
+          window.alert('Succesfully logged in!');
+          document.cookie = username;
+          this.loggedInUser = username;
+          this.router.navigate(['/dashboard']);
+        } else {
+          window.alert('Password incorrect!');
+        }
+      },
+      error => console.log('Error', error)
+    )
   }
 
   addItemToCart(username: string, item: Item){
