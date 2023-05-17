@@ -1,1 +1,68 @@
-<p>checkout works!</p>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Almost there!</h1>
+            <h2> Just a few last steps to finishing your sale </h2>
+            <div class="direita">
+        <!---<button (click)="goToCart()">Go back</button>-->
+        </div>
+        </header>
+        <div>
+            <!-- (submit)="finalCheckout(NIF.value, morada.value)"-->
+            <form>
+                <div class="row">
+    
+                    <div class="col">
+                        <h3 class="title"> Informations</h3>
+                        <div class="inputBox">
+                        <!--<label for="NIF">NIF:</label>-->
+                        <!--<input type="text" id="NIF" name="NIF" placeholder="123456789" #NIFInput>-->
+                            <span>NIF:</span>
+                            <input type="text" placeholder="123456789">
+                        </div>
+                        <div class="inputBox">
+                        <!--<label for="morada">Morada:</label>-->
+                        <!--<input type="text" id="morada" name="password" placeholder="Rua Dona Arlinda" #moradaInput>-->
+                            <span>Morada:</span>
+                            <input type="text" placeholder="Rua Dona Arlinda">
+                        </div>
+                        <div class="inputBox">
+                            <span>Cidade:</span>
+                            <input type="text" placeholder="Lisboa">
+                        </div>
+                        <div class="inputBox">
+                            <span>Código postal:</span>
+                            <input type="text" placeholder="1234-567">
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <h3 class="title"> Payment method
+                        <span class="material-symbols-outlined">credit_card</span>
+                        </h3>
+                        <div class="inputBox">
+                            <span>cards accepted:</span>
+                            <select name="format" id="format">
+                                <option selected disabled>Choose an Option</option>
+                                <option value="credit">Credit</option>
+                                <option value="debit">Debit</option>
+                            </select>
+                        </div>
+                        
+                        <div class="inputBox">
+                            <span>name on card:</span>
+                            <input type="text" placeholder="Felizberto Rodrigues">
+                        </div>
+    
+                        <div class="inputBox">
+                            <span>Morada:</span>
+                            <input type="text" placeholder="Rua Dona Arlinda">
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="submit-btn">
+            </form>
+        </div>
+    </div>
+</body>

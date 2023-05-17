@@ -1,0 +1,20 @@
+<body>
+    <header>
+        <h1>Profile</h1>
+        <button (click)="returnToProfile()">Go back</button>
+    </header>
+    <div>
+        <p> Alterar Nome: </p> <br>
+        <input id="username" type="text" #username/>
+    </div>
+    <div>
+        <h2>Select your profile picture:</h2>
+        <div *ngFor="let image of images">
+            <label>
+              <input type="radio" name="profile-picture" [value]="image.src" [(ngModel)]="selectedImg">
+              <img [src]="image.src" [alt]="image.alt" style="width: 100px; height: 100px;">
+            </label>
+          </div>
+        <button (click)="updateUser(username.value, selectedImg)">Update Profile</button>
+    </div>
+</body>

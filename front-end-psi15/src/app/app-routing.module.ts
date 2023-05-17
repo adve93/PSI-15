@@ -10,7 +10,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
+import { GameLibraryComponent } from './game-library/game-library.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/main-page', pathMatch: 'full'},
@@ -18,9 +21,12 @@ const routes: Routes = [
   { path: 'user-register', component: RegisterPageComponent},
   { path: 'user-login', component: LoginPageComponent},
   { path: 'user-details', component: UserProfileComponent},
-  { path: 'item-detail/:title', component: ItemDetailComponent},
+  { path: 'item/:title', component: ItemDetailComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'checkout', component: CheckoutComponent},
+  { path: 'user-update', component: UserUpdateComponent},
+  { path: 'user-profile', component: UserProfileComponent},
+  { path: 'myList', component: GameLibraryComponent},
   { path: 'user-cart', component: UserCartComponent}
 ];
 

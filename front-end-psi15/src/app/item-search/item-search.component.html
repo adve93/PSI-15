@@ -8,5 +8,6 @@
           {{item.title}}
         </a>
       </li>
+      <li *ngIf="searchBox.value && (items$ | async)?.length === 0">No item like that exists</li>
     </ul>
   </div>
