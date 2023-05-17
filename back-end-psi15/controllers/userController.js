@@ -236,13 +236,7 @@ exports.user_checkout_post = asyncHandler(async (req, res, next) => {
     else {
       userInstance.cart.forEach((value, key) => {
         for(i = 0; i < value; i++) {
-          const currentDate = new Date();
-          const day = currentDate.getDate();
-          const month = currentDate.getMonth() + 1; // Adding 1 because months are zero-based
-          const year = currentDate.getFullYear();
-
-          const gameDate = new Date(year, month - 1, day);
-          userInstance.games.set(key + ": Copy_" + (i+1), gameDate);
+          userInstance.games.set(key + ": Copy_" + (i+1), new Date());
         }
       })
       userInstance.cart.clear();
