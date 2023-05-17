@@ -18,7 +18,7 @@ export class CheckoutComponent {
       nif: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]], // 9-digit number
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
-      city: ['', Validators.required],
+      city: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{4}-[0-9]{3}$')]], // XXXX-XXX format
       cardType: ['', Validators.required],
       cardName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[A-Za-z ]*$/), this.noNumbersValidator]), // Custom validator for no numbers
