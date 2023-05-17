@@ -31,7 +31,9 @@ export class ItemDetailComponent {
     title: "",
     image: "ola",
     optional_links: []
-  }
+  };
+
+  optLink: string[] = [];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -54,7 +56,11 @@ export class ItemDetailComponent {
    });
   }
   
-
+  getLink() {
+    for(const el of this.tempItem.optional_links) {
+      this.optLink.push(el);
+    }
+  }
   
   getItem(title: string) {
     
@@ -62,6 +68,8 @@ export class ItemDetailComponent {
     var tempUser  = this.itemService.getItemByTitle(title).subscribe(
       item => {
         this.tempItem = item;
+        this.getLink();
+        console.log(this.optLink)
       },
       error => {
         console.log(error);

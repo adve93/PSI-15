@@ -83,9 +83,7 @@ export class UserService {
           window.alert(errorMessages);
         }
         if (error.status === 500) {
-          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
-          const errorMessages = errors[0].join(', ');
-          window.alert(errorMessages);
+          window.alert(error.error);
         }
         return throwError(error.message);
       })
@@ -157,7 +155,16 @@ export class UserService {
   }
 
   postUserCheckout(username: string) {
-    return this.http.post(`${this.backEnd}/user/checkout/${username}`, username);
+    return this.http.post(`${this.backEnd}/user/checkout/${username}`, username).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 422) {
+          window.alert(error.error);
+        }
+        if (error.status === 500) {
+          window.alert(error.error);
+        }
+        return throwError(error.message);
+      }));
   }
 
   deleteUserByUsername(username: string) {

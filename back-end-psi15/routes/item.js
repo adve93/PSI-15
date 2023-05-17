@@ -11,4 +11,6 @@ router.get("/detail/:title", item_controller.item_detail);
 
 router.get("/delete/:title", item_controller.item_delete_get);
 
+router.get("/deleteId/:title", item_controller.item_deleteById_get);
+
 module.exports = router;

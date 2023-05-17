@@ -21,6 +21,11 @@
         <p><strong>Languages:</strong> {{tempItem.languages.toString()}}</p>
         <p><strong>Price:</strong> {{tempItem.price}}</p>
         <p><strong>Classification:</strong> {{tempItem.classification}}</p>
+        <div *ngFor="let item of optLink">
+            <p><strong>Optional Links:</strong></p>
+            <img *ngIf="item.includes('.jpg')" [src]="item" alt="Image" style="width: 100px; height: 100px;">
+            <p *ngIf="item.includes('youtube')">{{item}}</p>
+        </div>
     </div>
     <button (click)="itemToCard()">Add to cart</button>
 </body>

@@ -35,7 +35,8 @@ import { GameLibraryComponent } from './game-library/game-library.component';
     ItemSearchComponent,
     CheckoutComponent,
     UserUpdateComponent,
-    GameLibraryComponent
+    GameLibraryComponent,
+    ItemDetailComponent
   ],
   imports: [
     BrowserModule,
