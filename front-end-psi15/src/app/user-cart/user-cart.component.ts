@@ -5,7 +5,6 @@ import { UserService } from '../user.service';
 import { ItemService } from '../item.service';
 import { Observable, flatMap, of } from 'rxjs';
 import { User } from '../user';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-cart',
@@ -53,7 +52,7 @@ export class UserCartComponent {
       return "";
     }
   }
-  
+
   deleteItemFromCart(title: string){
     const targetItem = this.itemsInDb.find(item => item.title === title);
     if (targetItem !== undefined) {

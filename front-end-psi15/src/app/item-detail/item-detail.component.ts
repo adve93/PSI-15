@@ -94,7 +94,5 @@ export class ItemDetailComponent {
       this.updateCartItemSize();
     }, 1000);
   }
-  goToCart(){
-    this.router.navigate(['/user-cart']);
-  }
+
 }
