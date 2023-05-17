@@ -21,7 +21,7 @@ export class GameLibraryComponent {
   
   ngOnInit() {
     this.username = this.userService.getLoggedInUser();
-    this.userService.getUserGames("Afonso").subscribe(response => {
+    this.userService.getUserGames(this.username).subscribe(response => {
       this.lib = Array(response)[0];
     });
 

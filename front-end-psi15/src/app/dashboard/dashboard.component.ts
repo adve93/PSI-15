@@ -49,4 +49,8 @@ export class DashboardComponent{
   goToUserProfile(): void{
     this.router.navigate(['/user-details']);
   }
+
+  goToLibrary() {
+    this.router.navigate(['/myList']);
+  }
 }

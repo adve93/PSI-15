@@ -78,6 +78,10 @@ export class ItemDetailComponent {
     this.router.navigate(['/dashboard']);
   }
 
+  goToLibrary(){
+    this.router.navigate(['/myList']);
+  }
+
   itemToCard(){
     this.itemService.getItemByTitle(this.title).subscribe
     (item=> this.userService.addItemToCart(this.username, item).subscribe());
