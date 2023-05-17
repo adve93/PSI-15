@@ -5,6 +5,8 @@ import { UserService } from '../user.service';
 import { ItemService } from '../item.service';
 import { Observable, flatMap, of } from 'rxjs';
 import { User } from '../user';
+import { MatDialog } from '@angular/material/dialog';
+import { AlterDialogComponent } from '../alter-dialog/alter-dialog.component';
 
 @Component({
   selector: 'user-cart',
@@ -16,7 +18,7 @@ export class UserCartComponent {
   items: Map<string, number> = new Map<string, number>;
   itemsInDb: Item[] = [];
 
-  constructor(private userService: UserService, private itemService: ItemService, private router: Router){}
+  constructor(private dialog: MatDialog, private userService: UserService, private itemService: ItemService, private router: Router){}
   
   ngOnInit(){
     this.loadData();
@@ -29,6 +31,23 @@ export class UserCartComponent {
     this.itemService.getItemList().subscribe((item: Item[]) => {
       this.itemsInDb = item;
     });
+  }
+
+  openAlterDialog(itemKey: string): void {
+    const dialogRef = this.dialog.open(AlterDialogComponent, {
+      width: '300px',
+      data: { itemKey: itemKey }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.alterItems(itemKey, result);
+      }
+    });
+  }
+  
+  alterItems(itemKey: string, result: any) {
+    throw new Error('Method not implemented.');
   }
 
   getItemDetail(title: string): string {

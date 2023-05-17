@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemDetailComponent } from './item-detail/item-detail.component'; 
+import { MatDialogModule } from '@angular/material/dialog';
 
 //Services
 import { ItemService } from './item.service';
@@ -24,6 +25,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { GameLibraryComponent } from './game-library/game-library.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { AlterDialogComponent } from './alter-dialog/alter-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +39,16 @@ import { UserCartComponent } from './user-cart/user-cart.component';
     CheckoutComponent,
     UserUpdateComponent,
     GameLibraryComponent,
-    UserCartComponent
+    UserCartComponent,
+    AlterDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [UserService, ItemService],
   bootstrap: [AppComponent]
