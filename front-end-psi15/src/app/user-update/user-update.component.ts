@@ -40,7 +40,6 @@ export class UserUpdateComponent {
   }
   
   updateUser(newUsername: string, updatedImage: string){
-    console.log(updatedImage);
     if (newUsername)
     this.tempuser.username = newUsername;
     if(updatedImage)
