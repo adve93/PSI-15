@@ -15,6 +15,7 @@ export class ItemDetailComponent {
 
   constructor(private route: ActivatedRoute, private router: Router, private itemService: ItemService, private userService: UserService, private changeDetectorRef: ChangeDetectorRef){}
 
+
   title: string = "";
 
   username: string = "";
@@ -85,7 +86,7 @@ export class ItemDetailComponent {
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }
-
+  
   goToLibrary(){
     this.router.navigate(['/myList']);
   }
@@ -97,7 +98,6 @@ export class ItemDetailComponent {
     setTimeout(() => {
       this.updateCartItemSize();
     }, 1000);
-    
-    
-}
+ 
+  }
 }

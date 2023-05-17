@@ -20,7 +20,6 @@ export class DashboardComponent{
   cartSize: number = 0;
 
   constructor(private router: Router, private itemService: ItemService, private userService: UserService){}
-
   
   ngOnInit() {
     this.username = this.userService.getLoggedInUser();
@@ -52,5 +51,8 @@ export class DashboardComponent{
 
   goToLibrary() {
     this.router.navigate(['/myList']);
+
+  goToCart(){
+    this.router.navigate(['/user-cart']);
   }
 }
