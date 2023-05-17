@@ -5,7 +5,7 @@
 			<button (click)="goToDashboard()">Go to Dashboard</button>
             <button (click)="goToLibrary()">Go to Library</button>
 			<div class="cart">
-				<button class="material-symbols-outlined">
+				<button (click)="goToCart()" class="material-symbols-outlined">
 					shopping_cart
 				</button>
 				<span class="quantity">{{ cartSize }}</span>

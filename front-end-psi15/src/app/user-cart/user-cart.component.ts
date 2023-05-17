@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Item } from '../item';
 import { UserService } from '../user.service';
 import { ItemService } from '../item.service';
@@ -14,7 +15,10 @@ export class UserCartComponent {
 
   items: Map<string, number> = new Map<string, number>;
   itemsInDb: Item[] = [];
-  constructor(private userService: UserService, private itemService: ItemService){}
+  constructor(private userService: UserService,private router: Router, private itemService: ItemService){}
+
+
+
   
   ngOnInit(){
     this.userService.getUserByUsername(this.userService.getLoggedInUser()).subscribe((user:User) => {
@@ -45,5 +49,13 @@ export class UserCartComponent {
       // No item with the matching title was found
       return "";
     }
+  }
+
+  goToDashboard(){
+    this.router.navigate(['/dashboard']);
+  }
+
+  goToCheckout(){
+    this.router.navigate(['/checkout']);
   }
 }
