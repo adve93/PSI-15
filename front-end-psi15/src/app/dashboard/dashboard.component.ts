@@ -49,5 +49,4 @@ export class DashboardComponent{
   goToUserProfile(): void{
     this.router.navigate(['/user-details']);
   }
-  
 }

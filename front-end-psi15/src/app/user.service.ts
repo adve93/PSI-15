@@ -23,6 +23,7 @@ export class UserService {
       cart: new Map(),
       games: new Map(),
       image: '../assets/pfpPics/pic1.jpg'
+
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -125,8 +126,34 @@ export class UserService {
     }
   }
 
-  addItemToCart(item: Item, username: string){
+  addItemToCart(username: string, item: Item){
     return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
+  }
+
+  getUserCart(username: string) {
+    return this.http.get(`${this.backEnd}/user/cart/${username}`);
+  }
+
+  getUserGames(username: string) {
+    return this.http.get(`${this.backEnd}/user/games/${username}`);
+  }
+
+  deleteItemUserCart(username: string, item: Item) {
+    return this.http.post(`${this.backEnd}/user/deleteItem/${username}`, item);
+  }
+
+  getNumberOfItemsIncCart(item: Item, username: string): Number{
+    var value: any;
+    this.http.get<Map<Item,Number>>(`${this.backEnd}/user/getCart/${username}`).subscribe(
+      (response: Map<Item,Number>) => {
+        value = response.get(item);
+      }
+    );
+    return value;
+  }
+
+  postUserCheckout(username: string) {
+    return this.http.post(`${this.backEnd}/user/checkout/${username}`, username);
   }
 
   deleteUserByUsername(username: string) {
