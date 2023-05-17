@@ -20,6 +20,10 @@ header {
 	padding: 20px;
 }
 
+.direita{
+  align-items: center;
+}
+
 nav {
 	background-color: #ffffff;
 	display: flex;
