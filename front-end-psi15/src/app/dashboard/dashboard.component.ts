@@ -38,7 +38,7 @@ export class DashboardComponent{
     this.router.navigate(['/user-details']);
   }
 
-  /**goToCart(){
-    this.router.navigate(['/cart']);
-  }*/
+  goToCart(){
+    this.router.navigate(['/user-cart']);
+  }
 }

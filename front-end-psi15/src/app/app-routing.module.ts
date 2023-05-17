@@ -10,6 +10,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main-page', pathMatch: 'full'},
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'item-detail/:title', component: ItemDetailComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'checkout', component: CheckoutComponent},
-  //{ path: 'cart', component: CartComponent}
+  { path: 'user-cart', component: UserCartComponent}
 ];
 
 @NgModule({

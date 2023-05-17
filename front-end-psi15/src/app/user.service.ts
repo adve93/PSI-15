@@ -109,8 +109,8 @@ export class UserService {
     return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
   }
 
-  getUserCart(username: string) {
-    return this.http.get(`${this.backEnd}/user/cart/${username}`);
+  getUserCart(username: string): Observable<Map<string, number>> {
+    return this.http.get<Map<string, number>>(`${this.backEnd}/user/cart/${username}`);
   }
 
   deleteItemUserCart(username: string, item: Item) {
