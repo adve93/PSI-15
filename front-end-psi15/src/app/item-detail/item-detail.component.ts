@@ -80,7 +80,7 @@ export class ItemDetailComponent {
 
   itemToCard(){
     this.itemService.getItemByTitle(this.title).subscribe
-    (item=> this.userService.addItemToCart(item,this.username).subscribe());
+    (item=> this.userService.addItemToCart(this.username, item).subscribe());
     window.alert("Item added to the cart!");
     setTimeout(() => {
       this.updateCartItemSize();
