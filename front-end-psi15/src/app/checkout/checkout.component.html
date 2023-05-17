@@ -10,78 +10,111 @@
     </header>
     <div class="container">
         <div>
-            <!-- (submit)="finalCheckout(NIF.value, morada.value)"-->
-            <form>
+            <form [formGroup]="checkoutForm" (ngSubmit)="checkout()">
                 <div class="row">
     
                     <div class="col">
                         <h3 class="title"> Informations</h3>
                         <div class="inputBox">
-                        <!--<label for="NIF">NIF:</label>-->
-                        <!--<input type="text" id="NIF" name="NIF" placeholder="123456789" #NIFInput>-->
                             <span>NIF:</span>
-                            <input type="text" placeholder="123456789">
-                        </div>
+                            <input type="text" placeholder="123456789" formControlName="nif">
+                            <div *ngIf="checkoutForm.get('nif')?.invalid && (checkoutForm.get('nif')?.dirty || checkoutForm.get('nif')?.touched)">
+                              <div *ngIf="checkoutForm.get('nif')?.errors?.['required']">NIF is required.</div>
+                              <div *ngIf="checkoutForm.get('nif')?.errors?.['pattern']">Invalid security number. It should be a 9-digit number.</div>
+                            </div>
+                          </div>
 
-                        <div class="inputBox">
-                            <span>email:</span>
-                            <input type="email" placeholder="example@example.com">
-                        </div>
+                          <div class="inputBox">
+                            <span>Email:</span>
+                            <input type="email" placeholder="example@example.com" formControlName="email">
+                            <div *ngIf="checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.dirty || checkoutForm.get('email')?.touched)">
+                              <div *ngIf="checkoutForm.get('email')?.errors?.['required']">Email is required.</div>
+                              <div *ngIf="checkoutForm.get('email')?.errors?.['email']">Invalid email address.</div>
+                            </div>
+                          </div>
 
-                        <div class="inputBox">
-                        <!--<label for="morada">Morada:</label>-->
-                        <!--<input type="text" id="morada" name="password" placeholder="Rua Dona Arlinda" #moradaInput>-->
+                          <div class="inputBox">
                             <span>Morada:</span>
-                            <input type="text" placeholder="Rua Dona Arlinda">
-                        </div>
-                        <div class="flex">
+                            <input type="text" placeholder="Rua Dona Arlinda" formControlName="address">
+                            <div *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.dirty || checkoutForm.get('address')?.touched)">
+                              <div *ngIf="checkoutForm.get('address')?.errors?.['required']">Address is required.</div>
+                            </div>
+                          </div>
+
+                          <div class="flex">
                             <div class="inputBox">
-                                <span>Cidade:</span>
-                                <input type="text" placeholder="Lisboa">
+                              <span>Cidade:</span>
+                              <input type="text" placeholder="Lisboa" formControlName="city">
+                              <div *ngIf="checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.dirty || checkoutForm.get('city')?.touched)">
+                                <div *ngIf="checkoutForm.get('city')?.errors?.['required']">City is required.</div>
+                              </div>
                             </div>
                             <div class="inputBox">
                                 <span>Código postal:</span>
-                                <input type="text" placeholder="1234-567">
-                            </div>
+                                <input type="text" placeholder="1234-567" formControlName="postalCode">
+                                <div *ngIf="checkoutForm.get('postalCode')?.invalid && (checkoutForm.get('postalCode')?.dirty || checkoutForm.get('postalCode')?.touched)">
+                                  <div *ngIf="checkoutForm.get('postalCode')?.errors?.['required']">Postal code is required.</div>
+                                  <div *ngIf="checkoutForm.get('postalCode')?.errors?.['pattern']">Invalid postal code. It should be in the XXXX-XXX format.</div>
+                                </div>
+                              </div>
                         </div>
                     </div>
                     
                     <div class="col">
                         <h3 class="title"> Payment method
-                            <!--<span class="material-symbols-outlined" >credit_card</span>-->
                         </h3>
                         <div class="inputBox">
-                            <span>cards accepted: </span>
-                            <select name="format" id="format">
-                                <option selected disabled>Choose an Option</option>
-                                <option value="credit">Credit</option>
-                                <option value="debit">Debit</option>
+                            <span>Cards accepted:</span>
+                            <select name="format" id="format" formControlName="cardType">
+                              <option selected disabled>Choose an Option</option>
+                              <option value="credit">Credit</option>
+                              <option value="debit">Debit</option>
                             </select>
-                        </div>
+                            <div *ngIf="checkoutForm.get('cardType')?.invalid && (checkoutForm.get('cardType')?.dirty || checkoutForm.get('cardType')?.touched)">
+                              <div *ngIf="checkoutForm.get('cardType')?.errors?.['required']">Card type is required.</div>
+                            </div>
+                          </div>
                         
-                        <div class="inputBox">
-                            <span>name on card:</span>
-                            <input type="text" placeholder="Felizberto Rodrigues">
-                        </div>
+                          <div class="inputBox">
+                            <span>Name on card:</span>
+                            <input type="text" placeholder="Felizberto Rodrigues" formControlName="cardName">
+                            <div *ngIf="checkoutForm.get('cardName')?.invalid && (checkoutForm.get('cardName')?.dirty || checkoutForm.get('cardName')?.touched)">
+                              <div *ngIf="checkoutForm.get('cardName')?.errors?.['required']">Name on card is required.</div>
+                              <div *ngIf="checkoutForm.get('cardName')?.errors?.['pattern']">letters only in this section.</div>
+                            </div>
+                          </div>
                         
-                        <div class="inputBox">
+                          <div class="inputBox">
                             <span>Number on card:</span>
-                            <input type="text" placeholder="1111 2222 3333 4444">
-                        </div>
-                        <div class="flex">
-                            <div class="inputBox">
-                                <span>exp date:</span>
-                                <input type="text" placeholder="07/23">
+                            <input type="text" placeholder="1111 2222 3333 4444" formControlName="cardNumber">
+                            <div *ngIf="checkoutForm.get('cardNumber')?.invalid && (checkoutForm.get('cardNumber')?.dirty || checkoutForm.get('cardNumber')?.touched)">
+                              <div *ngIf="checkoutForm.get('cardNumber')?.errors?.['required']">Number on card is required.</div>
+                              <div *ngIf="checkoutForm.get('cardNumber')?.errors?.['pattern']">Invalid card number. It should be in the XXXX XXXX XXXX XXXX format.</div>
                             </div>
+                          </div>
 
+                          <div class="flex">
                             <div class="inputBox">
-                                <span>Security number:</span>
-                                <input type="text" placeholder="123">
+                              <span>Exp date:</span>
+                              <input type="text" placeholder="07/23" formControlName="expDate">
+                              <div *ngIf="checkoutForm.get('expDate')?.invalid && (checkoutForm.get('expDate')?.dirty || checkoutForm.get('expDate')?.touched)">
+                                <div *ngIf="checkoutForm.get('expDate')?.errors?.['required']">Expiration date is required.</div>
+                                <div *ngIf="checkoutForm.get('expDate')?.errors?.['pattern']">Invalid expiration date. It should be in the MM/YY format.</div>
+                              </div>
                             </div>
-                        </div>
+                        
+                            <div class="inputBox">
+                              <span>Security number:</span>
+                              <input type="text" placeholder="123" formControlName="securityNumber">
+                              <div *ngIf="checkoutForm.get('securityNumber')?.invalid && (checkoutForm.get('securityNumber')?.dirty || checkoutForm.get('securityNumber')?.touched)">
+                                <div *ngIf="checkoutForm.get('securityNumber')?.errors?.['required']">Security number is required.</div>
+                                <div *ngIf="checkoutForm.get('securityNumber')?.errors?.['pattern']">Invalid security number. It should be a 3-digit number.</div>
+                              </div>
+                            </div>
+                          </div>
                     </div>
                 </div>
-                <input (click)="checkout()" type="submit" value="Ready to submit" class="submit-btn">
+                <input type="submit" value="Ready to submit" class="submit-btn">
             </form>
         </div>
     </div>
