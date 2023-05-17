@@ -21,7 +21,9 @@ import { ItemService } from './item.service';
 import { UserService } from './user.service';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 import { GameLibraryComponent } from './game-library/game-library.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,11 @@ import { GameLibraryComponent } from './game-library/game-library.component';
     UserProfileComponent,
     ItemSearchComponent,
     CheckoutComponent,
-    GameLibraryComponent
+    UserUpdateComponent,
+    GameLibraryComponent,
+    ItemDetailComponent,
+    UserCartComponent
+
   ],
   imports: [
     BrowserModule,

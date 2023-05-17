@@ -142,6 +142,23 @@ exports.user_cart_get = asyncHandler(async (req, res, next) => {
 
 });
 
+exports.user_cartSize_get = asyncHandler(async (req, res, next) => {
+
+  const userInstance = await User.findOne({ username: req.params.username}).exec();
+  if(!userInstance) 
+    return res.status(400).send("User does not exist!")
+  else {
+    
+    const cartItems = userInstance.cart;
+    var cartSize = 0;
+    cartItems.forEach((value, key) => {
+      cartSize = cartSize + value;
+    });
+    res.status(200).json(cartSize);
+  }
+
+});
+
 exports.user_cart_delete = asyncHandler(async (req, res, next) => {
 
   const userInstance = await User.findOne({ username: req.params.username}).exec();
@@ -179,7 +196,7 @@ exports.user_getGames_get = asyncHandler(async (req, res, next) => {
   else {
     
     const games = userInstance.games;
-    res.status(200).send(games);
+    res.status(200).json(Array.from(games));
   }
 });
 
@@ -190,20 +207,19 @@ exports.user_addCart_post = asyncHandler(async (req, res, next) => {
     return res.status(400).send('User not found');
   else {
     const itemInstance = await Item.findOne({ title: req.body.title}).exec();
-    if(!itemInstance)
-      return res.status(400).send("Item does not exist!")
-    else {
-      const itemTitle = itemInstance.title;
-      if(userInstance.cart.has(itemTitle)) {
-        var copies = userInstance.cart.get(itemTitle);
-        userInstance.cart.set(itemTitle,(copies + 1));
-        await userInstance.save();
-        return res.status(200).send('Item added to cart successfully');
-      } else {
-        userInstance.cart.set(itemTitle, 1);
-        await userInstance.save();
-        return res.status(200).send('Item added to cart successfully');
-      }
+    if (!itemInstance) {
+      return res.status(404).send('Item not found in cart');
+    }
+    const itemTitle = itemInstance.title;
+    if(userInstance.cart.has(itemTitle)) {
+      var copies = userInstance.cart.get(itemTitle);
+      userInstance.cart.set(itemTitle,(copies + 1));
+      await userInstance.save();
+      return res.status(200).send('Item added to cart successfully');
+    } else {
+      userInstance.cart.set(itemTitle, 1);
+      await userInstance.save();
+      return res.status(200).send('Item added to cart successfully');
     }
   }
 
@@ -220,7 +236,10 @@ exports.user_checkout_post = asyncHandler(async (req, res, next) => {
     else {
       userInstance.cart.forEach((value, key) => {
         for(i = 0; i < value; i++) {
-          userInstance.games.set(key + ": Copy_" + (i+1), new Date());
+          var count = 0;
+          while(userInstance.games.has(key + ": Copy_" + (i+1+count)))
+            count++;
+          userInstance.games.set(key + ": Copy_" + (i+1+count), new Date());
         }
       })
       userInstance.cart.clear();

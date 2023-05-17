@@ -4,26 +4,22 @@
 		<div class="direita">
 			<button (click)="goToUserProfile()">Profile</button>
 			<div class="cart">
-				<!--(click)="goToCart()"-->
-				<button class="material-symbols-outlined" >shopping_cart</button>
-				<span class="quantity">0</span>
+				<button class="material-symbols-outlined" (click)="goToCart()">
+					shopping_cart
+				</button>
+				<span class="quantity">{{ cartSize }}</span>
 			</div>
 		</div>
 	</header>
 	<nav>
 		<ul>
 			<li (click)="showNotImplemented()"><a>Lists</a></li>
-			<li (click)="showNotImplemented()"><a>Library of Games</a></li>
+			<li (click)="goToLibrary()"><a>Library of Games</a></li>
 			<li (click)="showNotImplemented()"><a>Followers</a></li>
 			<li (click)="showNotImplemented()"><a>Following</a></li>
 
 		</ul>
 	</nav>
-	<div class="items-menu">
-		<a *ngFor="let item of items"
-      routerLink="/item/{{item.title}}">
-      {{item.title}}
-  		</a>
-	</div>
+	
 	<item-search></item-search>
 </body>

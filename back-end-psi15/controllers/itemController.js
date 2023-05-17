@@ -42,7 +42,19 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 
   const itemInstance = await Item.findOneAndRemove({ title: req.params.title}).exec();
   if(!itemInstance) 
-    return next(new Error('Could not find user.'))
+    return next(new Error('Could not find item.'))
+  else {
+    res.json("Deleted successfully!")
+  }
+
+});
+
+// Deleted existing item. Returns a error if no item found.
+exports.item_deleteById_get = asyncHandler(async (req, res, next) => {
+
+  const itemInstance = await Item.findOneAndRemove({ id: req.params.id}).exec();
+  if(!itemInstance) 
+    return next(new Error('Could not find item.'))
   else {
     res.json("Deleted successfully!")
   }

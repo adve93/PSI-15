@@ -12,7 +12,7 @@ export class UserService {
 
   private backEnd = 'http://localhost:3065';
 
-  private loggedInUser: String | null = null;
+  loggedInUser = "";
 
   constructor (private http: HttpClient, private router: Router) {}
 
@@ -22,7 +22,8 @@ export class UserService {
       password: password,
       cart: new Map(),
       games: new Map(),
-      image: '../assets/pic1.jpg'
+      image: '../assets/pfpPics/pic1.jpg'
+
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -51,22 +52,19 @@ export class UserService {
     );
   }
 
-  setLoggedInUser(username: String){
-    this.loggedInUser = username;
-  }
-
   displayItem(title: string){
     this.router.navigate([`/itemDetail/${title}`]);
   }
 
+  
   getLoggedInUser(): string{
-    const cookieArray = document.cookie.split(';');
-    return cookieArray[1];
+    return this.loggedInUser;
   }
 
   isLoggedIn(): boolean {
-    return this.loggedInUser != null;
+    return this.loggedInUser != "";
   }
+
 
   getUserList() {
     return this.http.get<User[]>(`${this.backEnd}/user/`);
@@ -77,24 +75,51 @@ export class UserService {
   }
 
   postUpdateUser(user: User, oldUsername: string) {
-    return this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user);
+    this.loggedInUser = user.username;
+    this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user, { observe: 'response' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 422) {
+          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
+          const errorMessages = errors[0].join(', ');
+          window.alert(errorMessages);
+        }
+        if (error.status === 500) {
+          window.alert(error.error);
+        }
+        return throwError(error.message);
+      })
+    ).subscribe(
+      (response: HttpResponse<any>) => {
+        if(response.status === 200){
+          window.alert('New username/profile picture saved.');
+        }
+      },
+      (error) => {
+        console.log('Error:', error);
+      }
+    );
   }
 
   userLogin(username: string, password: string){
     var user = this.getUserByUsername(username);
-    if(!user) {
-      window.alert("User não existe!");
-    } else {
+    user.subscribe(user => {
+       if(!user) {
+        window.alert("User não existe!");
+        return;
+      }
+    })
       user.pipe(
         map(user => user as User),
         map(user => user.password)
       )
       .subscribe(
         (userPassword: string) => {
+          if(userPassword === null && userPassword === undefined)
+            return window.alert("User não existe!");
           if(userPassword === password) {
             window.alert('Succesfully logged in!');
             document.cookie = username;
-            this.setLoggedInUser(username);
+            this.loggedInUser = username;
             this.router.navigate(['/dashboard']);
           } else {
             window.alert('Password incorrect!');
@@ -102,15 +127,14 @@ export class UserService {
         },
         error => console.log('Error', error)
       )
-    }
   }
 
   addItemToCart(username: string, item: Item){
     return this.http.post(`${this.backEnd}/user/addItem/${username}`, item);
   }
 
-  getUserCart(username: string) {
-    return this.http.get(`${this.backEnd}/user/cart/${username}`);
+  getUserCart(username: string): Observable<Map<string, number>> {
+    return this.http.get<Map<string, number>>(`${this.backEnd}/user/cart/${username}`);
   }
 
   getUserGames(username: string) {
@@ -132,11 +156,23 @@ export class UserService {
   }
 
   postUserCheckout(username: string) {
-    return this.http.post(`${this.backEnd}/user/checkout/${username}`, username)
-
+    return this.http.post(`${this.backEnd}/user/checkout/${username}`, username).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 422) {
+          window.alert(error.error);
+        }
+        if (error.status === 500) {
+          window.alert(error.error);
+        }
+        return throwError(error.message);
+      }));
   }
 
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
+  }
+
+  getCartSizeByUsername(username: string) {
+    return this.http.get(`${this.backEnd}/user/cartSize/${username}`);
   }
 }

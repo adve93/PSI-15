@@ -25,4 +25,6 @@ router.post("/checkout/:username", user_controller.user_checkout_post);
 
 router.get("/gamesClear/:username", user_controller.user_clearGames_post);
 
+router.get("/cartSize/:username", user_controller.user_cartSize_get)
+
 module.exports = router;
