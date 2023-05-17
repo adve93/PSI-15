@@ -12,7 +12,7 @@ export class UserService {
 
   private backEnd = 'http://localhost:3065';
 
-  private loggedInUser: String | null = null;
+  loggedInUser = "";
 
   constructor (private http: HttpClient, private router: Router) {}
 
@@ -22,7 +22,8 @@ export class UserService {
       password: password,
       cart: new Map(),
       games: new Map(),
-      image: '../assets/pic1.jpg'
+      image: '../assets/pfpPics/pic1.jpg'
+
     };
     this.http.post(`${this.backEnd}/user/create`, user, { observe: 'response' }).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -51,22 +52,18 @@ export class UserService {
     );
   }
 
-  setLoggedInUser(username: String){
-    this.loggedInUser = username;
-  }
-
   displayItem(title: string){
     this.router.navigate([`/itemDetail/${title}`]);
   }
-
-  getLoggedInUser(): String | null{
-    const cookieArray = document.cookie.split(';');
-    return cookieArray[1];
+  
+  getLoggedInUser(): string{
+    return this.loggedInUser;
   }
 
   isLoggedIn(): boolean {
-    return this.loggedInUser != null;
+    return this.loggedInUser != "";
   }
+
 
   getUserList() {
     return this.http.get<User[]>(`${this.backEnd}/user/`);
@@ -77,7 +74,31 @@ export class UserService {
   }
 
   postUpdateUser(user: User, oldUsername: string) {
-    return this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user);
+    this.loggedInUser = user.username;
+    this.http.post(`${this.backEnd}/user/update/${oldUsername}`, user, { observe: 'response' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 422) {
+          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
+          const errorMessages = errors[0].join(', ');
+          window.alert(errorMessages);
+        }
+        if (error.status === 500) {
+          const errors = Array.isArray(error.error) ? error.error : Object.values(error.error);
+          const errorMessages = errors[0].join(', ');
+          window.alert(errorMessages);
+        }
+        return throwError(error.message);
+      })
+    ).subscribe(
+      (response: HttpResponse<any>) => {
+        if(response.status === 200){
+          window.alert('New username/profile picture saved.');
+        }
+      },
+      (error) => {
+        console.log('Error:', error);
+      }
+    );
   }
 
   userLogin(username: string, password: string){
@@ -94,7 +115,7 @@ export class UserService {
           if(userPassword === password) {
             window.alert('Succesfully logged in!');
             document.cookie = username;
-            this.setLoggedInUser(username);
+            this.loggedInUser = username;
             this.router.navigate(['/dashboard']);
           } else {
             window.alert('Password incorrect!');
@@ -137,5 +158,9 @@ export class UserService {
 
   deleteUserByUsername(username: string) {
     return this.http.get(`${this.backEnd}/user/delete/${username}`);
+  }
+
+  getCartSizeByUsername(username: string) {
+    return this.http.get(`${this.backEnd}/user/cartSize/${username}`);
   }
 }

@@ -14,27 +14,39 @@ import { UserService } from '../user.service';
 export class DashboardComponent{
 
   items: Item[] = [];
+  filteredItems: Item[] = [];
+
+  username = "";
+  cartSize: number = 0;
 
   constructor(private router: Router, private itemService: ItemService, private userService: UserService){}
 
   
   ngOnInit() {
-    this.userService.getUserGames("Afonso").subscribe(item =>
-      console.log(item))
+    this.username = this.userService.getLoggedInUser();
+    this.updateCartItemSize();
+  }
+
+  updateCartItemSize() {
+    this.userService.getCartSizeByUsername(this.username).subscribe(response => {
+      const size = Number(response);
+      if (!isNaN(size)) {
+       this.cartSize = size;
+     } else {
+       console.error('Invalid cart size:', response);
+     }
+   });
   }
 
   showNotImplemented(){
     window.alert('Feature not implemented.');
   }
 
-
   getItems(): void{
     this.itemService.getItemList().subscribe(items => this.items = items.slice(1, 5));
   }
 
-
   goToUserProfile(): void{
     this.router.navigate(['/user-details']);
   }
-
 }
