@@ -109,25 +109,25 @@ export class UserService {
         return;
       }
     })
-    user.pipe(
-      map(user => user as User),
-      map(user => user.password)
-    )
-    .subscribe(
-      (userPassword: string) => {
-        if(userPassword === null && userPassword === undefined)
-          return window.alert("User não existe!");
-        if(userPassword === password) {
-          window.alert('Succesfully logged in!');
-          document.cookie = username;
-          this.loggedInUser = username;
-          this.router.navigate(['/dashboard']);
-        } else {
-          window.alert('Password incorrect!');
-        }
-      },
-      error => console.log('Error', error)
-    )
+      user.pipe(
+        map(user => user as User),
+        map(user => user.password)
+      )
+      .subscribe(
+        (userPassword: string) => {
+          if(userPassword === null && userPassword === undefined)
+            return window.alert("User não existe!");
+          if(userPassword === password) {
+            window.alert('Succesfully logged in!');
+            document.cookie = username;
+            this.loggedInUser = username;
+            this.router.navigate(['/dashboard']);
+          } else {
+            window.alert('Password incorrect!');
+          }
+        },
+        error => console.log('Error', error)
+      )
   }
 
   addItemToCart(username: string, item: Item){
