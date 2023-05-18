@@ -15,7 +15,7 @@ app.use(cors());
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb+srv://Afonso:2Adleavid2002@cluster1.4rurvvj.mongodb.net/psi15?retryWrites=true&w=majority";
+const mongoDB = "http://appserver.alunos.di.fc.ul.pt:3065";
 
 main().catch((err) => console.log(err));
 async function main() {
