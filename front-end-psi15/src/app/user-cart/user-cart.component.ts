@@ -15,6 +15,7 @@ import { AlterDialogComponent } from '../alter-dialog/alter-dialog.component';
 })
 export class UserCartComponent {
 
+
   items: Map<string, number> = new Map<string, number>;
   itemsInDb: Item[] = [];
 
@@ -48,12 +49,15 @@ export class UserCartComponent {
   
   alterItems(itemKey: string, result: any) {
     if(result > 0){
-      for(let i = 0; i < result; i++){
+      
+        console.log("entrou")
         this.itemService.getItemByTitle(itemKey).subscribe((item: Item) => {
           console.log("entrou");
+          for(let i = 0; i < result; i++){
           this.userService.addItemToCart(this.userService.getLoggedInUser(), item).subscribe();
+          }
         });
-      }
+      
     }
     if(result < 0){
       for(let i = 0; i < (-result); i++){
@@ -100,4 +104,8 @@ export class UserCartComponent {
   goToDashboard(){
     this.router.navigate(['/dashboard']);
   }
+
+  goToCheckout() {
+    this.router.navigate(['/checkout']);
+  } 
 }
